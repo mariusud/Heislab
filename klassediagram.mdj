@@ -1633,182 +1633,6 @@
 							"templateParameterCompartment": {
 								"$ref": "AAAAAAFpuPwksLGz58g="
 							}
-						},
-						{
-							"_type": "UMLClassView",
-							"_id": "AAAAAAFpuTm+WbPK72c=",
-							"_parent": {
-								"$ref": "AAAAAAFF+qBtyKM79qY="
-							},
-							"model": {
-								"$ref": "AAAAAAFpuTm+WLPIBbU="
-							},
-							"subViews": [
-								{
-									"_type": "UMLNameCompartmentView",
-									"_id": "AAAAAAFpuTm+WbPLBU4=",
-									"_parent": {
-										"$ref": "AAAAAAFpuTm+WbPK72c="
-									},
-									"model": {
-										"$ref": "AAAAAAFpuTm+WLPIBbU="
-									},
-									"subViews": [
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAFpuTm+WbPM4DI=",
-											"_parent": {
-												"$ref": "AAAAAAFpuTm+WbPLBU4="
-											},
-											"visible": false,
-											"font": "Arial;13;0",
-											"left": -48,
-											"top": -16,
-											"height": 13
-										},
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAFpuTm+WbPNIFQ=",
-											"_parent": {
-												"$ref": "AAAAAAFpuTm+WbPLBU4="
-											},
-											"font": "Arial;13;1",
-											"left": 557,
-											"top": 463,
-											"width": 351,
-											"height": 13,
-											"text": "Elevator controller"
-										},
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAFpuTm+WbPO8rQ=",
-											"_parent": {
-												"$ref": "AAAAAAFpuTm+WbPLBU4="
-											},
-											"visible": false,
-											"font": "Arial;13;0",
-											"left": -48,
-											"top": -16,
-											"width": 73.67724609375,
-											"height": 13,
-											"text": "(from Model)"
-										},
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAFpuTm+WbPPk0k=",
-											"_parent": {
-												"$ref": "AAAAAAFpuTm+WbPLBU4="
-											},
-											"visible": false,
-											"font": "Arial;13;0",
-											"left": -48,
-											"top": -16,
-											"height": 13,
-											"horizontalAlignment": 1
-										}
-									],
-									"font": "Arial;13;0",
-									"left": 552,
-									"top": 456,
-									"width": 361,
-									"height": 25,
-									"stereotypeLabel": {
-										"$ref": "AAAAAAFpuTm+WbPM4DI="
-									},
-									"nameLabel": {
-										"$ref": "AAAAAAFpuTm+WbPNIFQ="
-									},
-									"namespaceLabel": {
-										"$ref": "AAAAAAFpuTm+WbPO8rQ="
-									},
-									"propertyLabel": {
-										"$ref": "AAAAAAFpuTm+WbPPk0k="
-									}
-								},
-								{
-									"_type": "UMLAttributeCompartmentView",
-									"_id": "AAAAAAFpuTm+WbPQxjc=",
-									"_parent": {
-										"$ref": "AAAAAAFpuTm+WbPK72c="
-									},
-									"model": {
-										"$ref": "AAAAAAFpuTm+WLPIBbU="
-									},
-									"font": "Arial;13;0",
-									"left": 552,
-									"top": 481,
-									"width": 361,
-									"height": 10
-								},
-								{
-									"_type": "UMLOperationCompartmentView",
-									"_id": "AAAAAAFpuTm+WbPRtpU=",
-									"_parent": {
-										"$ref": "AAAAAAFpuTm+WbPK72c="
-									},
-									"model": {
-										"$ref": "AAAAAAFpuTm+WLPIBbU="
-									},
-									"font": "Arial;13;0",
-									"left": 552,
-									"top": 491,
-									"width": 361,
-									"height": 10
-								},
-								{
-									"_type": "UMLReceptionCompartmentView",
-									"_id": "AAAAAAFpuTm+WbPSck0=",
-									"_parent": {
-										"$ref": "AAAAAAFpuTm+WbPK72c="
-									},
-									"model": {
-										"$ref": "AAAAAAFpuTm+WLPIBbU="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": -24,
-									"top": -8,
-									"width": 10,
-									"height": 10
-								},
-								{
-									"_type": "UMLTemplateParameterCompartmentView",
-									"_id": "AAAAAAFpuTm+WrPTIGo=",
-									"_parent": {
-										"$ref": "AAAAAAFpuTm+WbPK72c="
-									},
-									"model": {
-										"$ref": "AAAAAAFpuTm+WLPIBbU="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": -24,
-									"top": -8,
-									"width": 10,
-									"height": 10
-								}
-							],
-							"font": "Arial;13;0",
-							"containerChangeable": true,
-							"left": 552,
-							"top": 456,
-							"width": 361,
-							"height": 249,
-							"nameCompartment": {
-								"$ref": "AAAAAAFpuTm+WbPLBU4="
-							},
-							"attributeCompartment": {
-								"$ref": "AAAAAAFpuTm+WbPQxjc="
-							},
-							"operationCompartment": {
-								"$ref": "AAAAAAFpuTm+WbPRtpU="
-							},
-							"receptionCompartment": {
-								"$ref": "AAAAAAFpuTm+WbPSck0="
-							},
-							"templateParameterCompartment": {
-								"$ref": "AAAAAAFpuTm+WrPTIGo="
-							}
 						}
 					]
 				},
@@ -1826,7 +1650,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuPc5vK7k9Ug="
 							},
-							"name": "typedef enum state_t"
+							"name": "typedef enum state_t",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -1861,7 +1686,8 @@
 									"_parent": {
 										"$ref": "AAAAAAFpuXLvN7RCvvw="
 									},
-									"name": "state_t state"
+									"name": "state_t state",
+									"type": ""
 								}
 							]
 						},
@@ -1921,7 +1747,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuPrtRrEbp5I="
 							},
-							"name": "Array3x4"
+							"name": "Array3x4",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -1939,7 +1766,8 @@
 									"_parent": {
 										"$ref": "AAAAAAFpuTAL1bOEd+A="
 									},
-									"name": "int button"
+									"name": "int button",
+									"type": ""
 								}
 							]
 						},
@@ -2019,7 +1847,8 @@
 								"$ref": "AAAAAAFpuPuq87FUITQ="
 							},
 							"name": "define N_FLOORS 4",
-							"visibility": "protected"
+							"visibility": "protected",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -2028,7 +1857,8 @@
 								"$ref": "AAAAAAFpuPuq87FUITQ="
 							},
 							"name": "define N_BUTTONS 3",
-							"visibility": "protected"
+							"visibility": "protected",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -2036,7 +1866,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuPuq87FUITQ="
 							},
-							"name": "typedef enum elev_motor_direction_t"
+							"name": "typedef enum elev_motor_direction_t",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -2044,7 +1875,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuPuq87FUITQ="
 							},
-							"name": "elev_button_type_t"
+							"name": "elev_button_type_t",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -2243,7 +2075,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuPvfwrF+XZo="
 							},
-							"name": "int channel"
+							"name": "int channel",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -2251,7 +2084,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuPvfwrF+XZo="
 							},
-							"name": "int current_floor"
+							"name": "int current_floor",
+							"type": ""
 						}
 					],
 					"operations": [
