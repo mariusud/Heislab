@@ -1,17 +1,7 @@
-
-
-
 /**
-  Check for order on all floors and in elevator
-  returns 1 if there exists an order, 0 else
-*/
-void Add_order(int button);
-
-
-
-/**
-  Check for order on all floors and in elevator
-  returns 1 if there exists an order, 0 else
+ Needs to be running all the time. 
+ if a button is pushed, adds the order to the floor 
+returns 1 if there IS an order, 0 else
 */
 int check_queue();
 
@@ -25,7 +15,7 @@ int check_queue_floor(int floor);
 
 
 /**
-  
+  tells the system whether it should stop at the current floor
 */
 int should_stop(int floor);
 
@@ -44,11 +34,9 @@ void delete_all_orders();
 
 /**
   Check for order on all floors and in elevator
-  returns true if there exists an order
+  iterate through whole lists to see if orders above, below or in current floor
+  returns 1 if direction up, 0 if order in current floor or -1 if direction down
+  floor is the last locally known floor the elevator is in
 */
-void set_direction();
-
-int should_stop();
-
-int get_direction();
+int get_direction(int floor);
 
