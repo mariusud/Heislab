@@ -203,7 +203,7 @@
 											"top": 275,
 											"width": 351,
 											"height": 13,
-											"text": "+void FSM_move(state_t state)",
+											"text": "+void FSM_set_state(STATE state)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -220,7 +220,7 @@
 											"top": 290,
 											"width": 351,
 											"height": 13,
-											"text": "+enum FSM_check_state()",
+											"text": "+State FSM_get_state()",
 											"horizontalAlignment": 0
 										},
 										{
@@ -519,7 +519,7 @@
 											"top": 260,
 											"width": 311,
 											"height": 13,
-											"text": "+bool check_queue()",
+											"text": "+int check_queue()",
 											"horizontalAlignment": 0
 										},
 										{
@@ -536,7 +536,7 @@
 											"top": 275,
 											"width": 311,
 											"height": 13,
-											"text": "+bool check_queue(int floor)",
+											"text": "+int check_queue_floor(int floor)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -604,7 +604,24 @@
 											"top": 335,
 											"width": 311,
 											"height": 13,
-											"text": "+Operation2()",
+											"text": "+int should_stop()",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFp2VczT9QE6Ww=",
+											"_parent": {
+												"$ref": "AAAAAAFpuPrtR7EkzfE="
+											},
+											"model": {
+												"$ref": "AAAAAAFp2Vcy99QBauw="
+											},
+											"font": "Arial;13;0",
+											"left": 653,
+											"top": 350,
+											"width": 311,
+											"height": 13,
+											"text": "+int get_direction()",
 											"horizontalAlignment": 0
 										}
 									],
@@ -612,7 +629,7 @@
 									"left": 648,
 									"top": 240,
 									"width": 321,
-									"height": 113
+									"height": 128
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -652,7 +669,7 @@
 							"left": 648,
 							"top": 192,
 							"width": 321,
-							"height": 185,
+							"height": 191,
 							"nameCompartment": {
 								"$ref": "AAAAAAFpuPrtR7EeMyc="
 							},
@@ -1678,7 +1695,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuPc5vK7k9Ug="
 							},
-							"name": "void FSM_move",
+							"name": "void FSM_set_state",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -1686,8 +1703,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFpuXLvN7RCvvw="
 									},
-									"name": "state_t state",
-									"type": ""
+									"name": "STATE state"
 								}
 							]
 						},
@@ -1697,7 +1713,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuPc5vK7k9Ug="
 							},
-							"name": "enum FSM_check_state"
+							"name": "State FSM_get_state"
 						},
 						{
 							"_type": "UMLOperation",
@@ -1777,7 +1793,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuPrtRrEbp5I="
 							},
-							"name": "bool check_queue"
+							"name": "int check_queue"
 						},
 						{
 							"_type": "UMLOperation",
@@ -1785,7 +1801,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuPrtRrEbp5I="
 							},
-							"name": "bool check_queue",
+							"name": "int check_queue_floor",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -1793,8 +1809,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFpuTCmNrONkQs="
 									},
-									"name": "int floor",
-									"type": ""
+									"name": "int floor"
 								}
 							]
 						},
@@ -1828,7 +1843,15 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuPrtRrEbp5I="
 							},
-							"name": "Operation2"
+							"name": "int should_stop"
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFp2Vcy99QBauw=",
+							"_parent": {
+								"$ref": "AAAAAAFpuPrtRrEbp5I="
+							},
+							"name": "int get_direction"
 						}
 					]
 				},
