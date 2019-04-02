@@ -4,25 +4,6 @@
 	"name": "Untitled",
 	"ownedElements": [
 		{
-			"_type": "UMLModel",
-			"_id": "AAAAAAFF+qBWK6M3Z8Y=",
-			"_parent": {
-				"$ref": "AAAAAAFF+h6SjaM2Hec="
-			},
-			"name": "Model",
-			"ownedElements": [
-				{
-					"_type": "UMLClassDiagram",
-					"_id": "AAAAAAFF+qBtyKM79qY=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "Main",
-					"defaultDiagram": true
-				}
-			]
-		},
-		{
 			"_type": "UMLStateMachine",
 			"_id": "AAAAAAFpuSVhiecBjhM=",
 			"_parent": {
@@ -2484,10 +2465,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuSVhiucCA9w="
 							},
-							"name": "State2",
-							"submachine": {
-								"$ref": "AAAAAAFpuVaGxRNgbiM="
-							}
+							"name": "State2"
 						},
 						{
 							"_type": "UMLPseudostate",
@@ -2875,23 +2853,6 @@
 							}
 						}
 					]
-				}
-			]
-		},
-		{
-			"_type": "UMLStateMachine",
-			"_id": "AAAAAAFpuVaGxRNgbiM=",
-			"_parent": {
-				"$ref": "AAAAAAFF+h6SjaM2Hec="
-			},
-			"name": "StateMachine2",
-			"regions": [
-				{
-					"_type": "UMLRegion",
-					"_id": "AAAAAAFpuVaGxRNhA5I=",
-					"_parent": {
-						"$ref": "AAAAAAFpuVaGxRNgbiM="
-					}
 				}
 			]
 		}
