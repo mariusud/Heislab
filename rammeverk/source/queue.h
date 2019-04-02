@@ -1,5 +1,5 @@
 
-extern elev_button_type_t direction;
+extern elev_motor_direction_t direction;
 
 void init_arrays();
 /**

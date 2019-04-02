@@ -4,7 +4,7 @@
 
 
 static int arr_opp[N_FLOORS]; 
-static int arr_ned[N_FLOORS]; // ned og opp er for eksterne heistilkallinger
+static int arr_ned[N_FLOORS]; 
 static int arr_destination[N_FLOORS];
 
 elev_button_type_t direction;
@@ -45,6 +45,7 @@ int check_queue(){
 
 
 int check_queue_floor(int floor){
+    if (floor == -1){return 0;}
     if (arr_opp[floor]){
         return 1;
     }
@@ -108,8 +109,12 @@ elev_motor_direction_t get_direction(int floor){
     else if (order_below(floor) && direction == DIRN_DOWN){return DIRN_DOWN;}
     else if (order_above(floor)){return DIRN_UP;}
     else if (order_below(floor)){return DIRN_DOWN;}
-    else if ((floor == -1) || !(floor)){
-        printf("Someting wong");
-        return DIRN_STOP;
+    else if (floor == -1){
+        printf("Unable to find floor, will continue in last known direction");
+        return direction;
         }
+    else{
+        printf("Get_direction fault");
+        return direction;
+    }
 }
