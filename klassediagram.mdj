@@ -203,7 +203,7 @@
 											"top": 275,
 											"width": 351,
 											"height": 13,
-											"text": "+void FSM_move(state_t state)",
+											"text": "+void FSM_set_state(STATE state)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -220,7 +220,7 @@
 											"top": 290,
 											"width": 351,
 											"height": 13,
-											"text": "+enum FSM_check_state()",
+											"text": "+State FSM_get_state()",
 											"horizontalAlignment": 0
 										},
 										{
@@ -655,16 +655,25 @@
 											"top": 380,
 											"width": 311,
 											"height": 13,
+<<<<<<< HEAD
 											"text": "+int order_below(int floor)",
+=======
+											"text": "+int should_stop()",
+>>>>>>> 68bf93b61e7e44a80a258d06af024f53fbed852c
 											"horizontalAlignment": 0
 										},
 										{
 											"_type": "UMLOperationView",
+<<<<<<< HEAD
 											"_id": "AAAAAAFp3U6BxkG2d6c=",
+=======
+											"_id": "AAAAAAFp2VczT9QE6Ww=",
+>>>>>>> 68bf93b61e7e44a80a258d06af024f53fbed852c
 											"_parent": {
 												"$ref": "AAAAAAFpuPrtR7EkzfE="
 											},
 											"model": {
+<<<<<<< HEAD
 												"$ref": "AAAAAAFp3U6BrUGzJ08="
 											},
 											"font": "Arial;13;0",
@@ -673,6 +682,16 @@
 											"width": 311,
 											"height": 13,
 											"text": "+elev_motor_direction_t get_direction(int floor)",
+=======
+												"$ref": "AAAAAAFp2Vcy99QBauw="
+											},
+											"font": "Arial;13;0",
+											"left": 653,
+											"top": 350,
+											"width": 311,
+											"height": 13,
+											"text": "+int get_direction()",
+>>>>>>> 68bf93b61e7e44a80a258d06af024f53fbed852c
 											"horizontalAlignment": 0
 										}
 									],
@@ -720,7 +739,11 @@
 							"left": 648,
 							"top": 192,
 							"width": 321,
+<<<<<<< HEAD
 							"height": 221,
+=======
+							"height": 191,
+>>>>>>> 68bf93b61e7e44a80a258d06af024f53fbed852c
 							"nameCompartment": {
 								"$ref": "AAAAAAFpuPrtR7EeMyc="
 							},
@@ -1746,7 +1769,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuPc5vK7k9Ug="
 							},
-							"name": "void FSM_move",
+							"name": "void FSM_set_state",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -1754,8 +1777,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFpuXLvN7RCvvw="
 									},
-									"name": "state_t state",
-									"type": ""
+									"name": "STATE state"
 								}
 							]
 						},
@@ -1765,7 +1787,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuPc5vK7k9Ug="
 							},
-							"name": "enum FSM_check_state"
+							"name": "State FSM_get_state"
 						},
 						{
 							"_type": "UMLOperation",
@@ -1929,6 +1951,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuPrtRrEbp5I="
 							},
+<<<<<<< HEAD
 							"name": "int order_below",
 							"parameters": [
 								{
@@ -1960,6 +1983,17 @@
 									"type": ""
 								}
 							]
+=======
+							"name": "int should_stop"
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFp2Vcy99QBauw=",
+							"_parent": {
+								"$ref": "AAAAAAFpuPrtRrEbp5I="
+							},
+							"name": "int get_direction"
+>>>>>>> 68bf93b61e7e44a80a258d06af024f53fbed852c
 						}
 					]
 				},
