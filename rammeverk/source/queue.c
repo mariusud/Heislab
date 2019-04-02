@@ -38,9 +38,9 @@ int check_queue(){
             elev_set_button_lamp(BUTTON_COMMAND,i,1);
             arr_destination[i] = 1;
             return 1;
-        }
-        else{return 0;}  
+        } 
     }
+    return 0;
 }
 
 
@@ -88,6 +88,7 @@ int order_above(int floor){
             return 0;
         }
     }
+    return 0;
 }
 
 int order_below(int floor){
@@ -99,6 +100,7 @@ int order_below(int floor){
             return 0;
         }
     }
+    return 0;
 }
 
 
