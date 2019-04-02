@@ -7,7 +7,7 @@ static int arr_opp[N_FLOORS];
 static int arr_ned[N_FLOORS]; 
 static int arr_destination[N_FLOORS];
 
-elev_button_type_t direction;
+elev_motor_direction_t direction;
 // int floor;
 
 
