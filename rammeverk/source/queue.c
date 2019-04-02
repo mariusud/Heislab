@@ -3,27 +3,39 @@
 #include <stdio.h>
 
 
-static int arr_opp[N_FLOORS-1]; 
-static int arr_ned[N_FLOORS-1]; // ned og opp er for eksterne heistilkallinger
-static int arr_destination[N_FLOORS-1];
+static int arr_opp[N_FLOORS]; 
+static int arr_ned[N_FLOORS]; // ned og opp er for eksterne heistilkallinger
+static int arr_destination[N_FLOORS];
 
 elev_button_type_t direction;
 // int floor;
-int order;
 
+
+
+void init_arrays(){
+    int i;
+    for (i =0; i < N_FLOORS;i++){
+        arr_destination[i] = 0;
+        arr_ned[i] = 0;
+        arr_opp[i] = 0;
+    }
+}
 
 int check_queue(){
     int i;
     for (i=0; i < N_FLOORS; i++){
         if(elev_get_button_signal(BUTTON_CALL_UP,i)){
+            elev_set_button_lamp(BUTTON_CALL_UP,i,1);
             arr_opp[i] = 1;         
             return 1;
         }
         if(elev_get_button_signal(BUTTON_CALL_DOWN,i)){
+            elev_set_button_lamp(BUTTON_CALL_DOWN,i,1);
             arr_ned[i] = 1;
             return 1;
         }
         if(elev_get_button_signal(BUTTON_COMMAND,i)){
+            elev_set_button_lamp(BUTTON_COMMAND,i,1);
             arr_destination[i] = 1;
             return 1;
         }
@@ -49,7 +61,9 @@ int check_queue_floor(int floor){
 
 
 void delete_floor_order(int floor){
-    // delete lamps aswell
+    elev_set_button_lamp(BUTTON_CALL_UP,floor,0);
+    elev_set_button_lamp(BUTTON_CALL_DOWN,floor,0);
+    elev_set_button_lamp(BUTTON_COMMAND,floor,0);
     arr_opp[floor] = 0;
     arr_ned[floor] = 0;
     arr_destination[floor] = 0;
