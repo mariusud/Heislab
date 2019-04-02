@@ -468,7 +468,58 @@
 											"top": 222,
 											"width": 311,
 											"height": 13,
-											"text": "+Array3x4",
+											"text": "+static int arr_opp[N_FLOORS]",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFp3U+LSEHP/Ow=",
+											"_parent": {
+												"$ref": "AAAAAAFpuPrtR7EjzXQ="
+											},
+											"model": {
+												"$ref": "AAAAAAFp3U+LE0HM3Mo="
+											},
+											"font": "Arial;13;0",
+											"left": 653,
+											"top": 237,
+											"width": 311,
+											"height": 13,
+											"text": "+static int arr_ned[N_FLOORS]",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFp3U97ZEHJCFI=",
+											"_parent": {
+												"$ref": "AAAAAAFpuPrtR7EjzXQ="
+											},
+											"model": {
+												"$ref": "AAAAAAFp3U97UUHGlXw="
+											},
+											"font": "Arial;13;0",
+											"left": 653,
+											"top": 252,
+											"width": 311,
+											"height": 13,
+											"text": "+static int arr_destination[N_FLOORS]",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFp3U8hZkG/Soo=",
+											"_parent": {
+												"$ref": "AAAAAAFpuPrtR7EjzXQ="
+											},
+											"model": {
+												"$ref": "AAAAAAFp3U8hWUG8OsQ="
+											},
+											"font": "Arial;13;0",
+											"left": 653,
+											"top": 267,
+											"width": 311,
+											"height": 13,
+											"text": "+extern elev_button_type_t direction",
 											"horizontalAlignment": 0
 										}
 									],
@@ -476,7 +527,7 @@
 									"left": 648,
 									"top": 217,
 									"width": 321,
-									"height": 23
+									"height": 68
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -499,10 +550,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 653,
-											"top": 245,
+											"top": 290,
 											"width": 311,
 											"height": 13,
-											"text": "+void Add_order(int button)",
+											"text": "+void init_arrays()",
 											"horizontalAlignment": 0
 										},
 										{
@@ -516,10 +567,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 653,
-											"top": 260,
+											"top": 305,
 											"width": 311,
 											"height": 13,
-											"text": "+bool check_queue()",
+											"text": "+int check_queue()",
 											"horizontalAlignment": 0
 										},
 										{
@@ -533,10 +584,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 653,
-											"top": 275,
+											"top": 320,
 											"width": 311,
 											"height": 13,
-											"text": "+bool check_queue(int floor)",
+											"text": "+int check_queue_floor(int floor)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -550,10 +601,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 653,
-											"top": 290,
+											"top": 335,
 											"width": 311,
 											"height": 13,
-											"text": "+void delete_floor_order()",
+											"text": "+void delete_floor_order(int floor)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -567,7 +618,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 653,
-											"top": 305,
+											"top": 350,
 											"width": 311,
 											"height": 13,
 											"text": "+void delete_all_orders()",
@@ -584,10 +635,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 653,
-											"top": 320,
+											"top": 365,
 											"width": 311,
 											"height": 13,
-											"text": "+set_direction()",
+											"text": "+int order_above(int floor)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -601,18 +652,35 @@
 											},
 											"font": "Arial;13;0",
 											"left": 653,
-											"top": 335,
+											"top": 380,
 											"width": 311,
 											"height": 13,
-											"text": "+Operation2()",
+											"text": "+int order_below(int floor)",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFp3U6BxkG2d6c=",
+											"_parent": {
+												"$ref": "AAAAAAFpuPrtR7EkzfE="
+											},
+											"model": {
+												"$ref": "AAAAAAFp3U6BrUGzJ08="
+											},
+											"font": "Arial;13;0",
+											"left": 653,
+											"top": 395,
+											"width": 311,
+											"height": 13,
+											"text": "+elev_motor_direction_t get_direction(int floor)",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 648,
-									"top": 240,
+									"top": 285,
 									"width": 321,
-									"height": 113
+									"height": 128
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -652,7 +720,7 @@
 							"left": 648,
 							"top": 192,
 							"width": 321,
-							"height": 185,
+							"height": 221,
 							"nameCompartment": {
 								"$ref": "AAAAAAFpuPrtR7EeMyc="
 							},
@@ -1747,8 +1815,31 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuPrtRrEbp5I="
 							},
-							"name": "Array3x4",
-							"type": ""
+							"name": "static int arr_opp[N_FLOORS]"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAFp3U+LE0HM3Mo=",
+							"_parent": {
+								"$ref": "AAAAAAFpuPrtRrEbp5I="
+							},
+							"name": "static int arr_ned[N_FLOORS]"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAFp3U97UUHGlXw=",
+							"_parent": {
+								"$ref": "AAAAAAFpuPrtRrEbp5I="
+							},
+							"name": "static int arr_destination[N_FLOORS]"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAFp3U8hWUG8OsQ=",
+							"_parent": {
+								"$ref": "AAAAAAFpuPrtRrEbp5I="
+							},
+							"name": "extern elev_button_type_t direction"
 						}
 					],
 					"operations": [
@@ -1758,18 +1849,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuPrtRrEbp5I="
 							},
-							"name": "void Add_order",
-							"parameters": [
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAFpuTClRbOLTbU=",
-									"_parent": {
-										"$ref": "AAAAAAFpuTAL1bOEd+A="
-									},
-									"name": "int button",
-									"type": ""
-								}
-							]
+							"name": "void init_arrays"
 						},
 						{
 							"_type": "UMLOperation",
@@ -1777,7 +1857,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuPrtRrEbp5I="
 							},
-							"name": "bool check_queue"
+							"name": "int check_queue"
 						},
 						{
 							"_type": "UMLOperation",
@@ -1785,7 +1865,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuPrtRrEbp5I="
 							},
-							"name": "bool check_queue",
+							"name": "int check_queue_floor",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -1793,8 +1873,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFpuTCmNrONkQs="
 									},
-									"name": "int floor",
-									"type": ""
+									"name": "int floor"
 								}
 							]
 						},
@@ -1804,7 +1883,18 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuPrtRrEbp5I="
 							},
-							"name": "void delete_floor_order"
+							"name": "void delete_floor_order",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFp3VIokEHcYvs=",
+									"_parent": {
+										"$ref": "AAAAAAFpuTUd07OtKMY="
+									},
+									"name": "int floor",
+									"type": ""
+								}
+							]
 						},
 						{
 							"_type": "UMLOperation",
@@ -1820,7 +1910,18 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuPrtRrEbp5I="
 							},
-							"name": "set_direction"
+							"name": "int order_above",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFp3VK0+EHgSFg=",
+									"_parent": {
+										"$ref": "AAAAAAFpuTcHtbO9i5Q="
+									},
+									"name": "int floor",
+									"type": ""
+								}
+							]
 						},
 						{
 							"_type": "UMLOperation",
@@ -1828,7 +1929,37 @@
 							"_parent": {
 								"$ref": "AAAAAAFpuPrtRrEbp5I="
 							},
-							"name": "Operation2"
+							"name": "int order_below",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFp3VLI90HjDDE=",
+									"_parent": {
+										"$ref": "AAAAAAFpuYXH1rSFcnk="
+									},
+									"name": "int floor",
+									"type": ""
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFp3U6BrUGzJ08=",
+							"_parent": {
+								"$ref": "AAAAAAFpuPrtRrEbp5I="
+							},
+							"name": "elev_motor_direction_t get_direction",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFp3VMe7kHnga4=",
+									"_parent": {
+										"$ref": "AAAAAAFp3U6BrUGzJ08="
+									},
+									"name": "int floor",
+									"type": ""
+								}
+							]
 						}
 					]
 				},
