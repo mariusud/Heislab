@@ -18,15 +18,3 @@ typedef enum states{
 */
 void FSM_init();
 
-/**
- sets state
-*/
-void FSM_set_state(State st);
-
-
-void FSM_move(State st);
-
-State FSM_check_state();
-
-void FSM_idle();
-
