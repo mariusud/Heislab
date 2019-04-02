@@ -1,12 +1,11 @@
-#include "queue.h"
 #include "elev.h"
+#include "queue.h"
 #include <stdio.h>
 
 
 static int arr_opp[N_FLOORS]; 
 static int arr_ned[N_FLOORS]; 
 static int arr_destination[N_FLOORS];
-
 elev_motor_direction_t direction;
 // int floor;
 
@@ -23,22 +22,47 @@ void init_arrays(){
 
 int check_queue(){
     int i;
-    for (i=0; i < N_FLOORS; i++){
-        if(elev_get_button_signal(BUTTON_CALL_UP,i)){
-            elev_set_button_lamp(BUTTON_CALL_UP,i,1);
-            arr_opp[i] = 1;         
-            return 1;
+    for (i=1; i < N_FLOORS; i++){
+        if (i == 0){
+            if(elev_get_button_signal(BUTTON_CALL_UP,i)){
+                elev_set_button_lamp(BUTTON_CALL_UP,i,1);
+                arr_opp[i] = 1;         
+                return 1;
+            }
+            if(elev_get_button_signal(BUTTON_COMMAND,i)){
+                elev_set_button_lamp(BUTTON_COMMAND,i,1);
+                arr_destination[i] = 1;
+                return 1;
+                }
+            }
+        if (i == 3){
+            if(elev_get_button_signal(BUTTON_CALL_DOWN,i)){
+                elev_set_button_lamp(BUTTON_CALL_DOWN,i,1);
+                arr_ned[i] = 1;
+                return 1;
+            }
+            if(elev_get_button_signal(BUTTON_COMMAND,i)){
+                elev_set_button_lamp(BUTTON_COMMAND,i,1);
+                arr_destination[i] = 1;
+                return 1;
+            }
+        } else{
+            if(elev_get_button_signal(BUTTON_CALL_UP,i)){
+                elev_set_button_lamp(BUTTON_CALL_UP,i,1);
+                arr_opp[i] = 1;         
+                return 1;
+                }
+            if(elev_get_button_signal(BUTTON_CALL_DOWN,i)){
+                elev_set_button_lamp(BUTTON_CALL_DOWN,i,1);
+                arr_ned[i] = 1;
+                return 1;
+            }
+            if(elev_get_button_signal(BUTTON_COMMAND,i)){
+                elev_set_button_lamp(BUTTON_COMMAND,i,1);
+                arr_destination[i] = 1;
+                return 1;
+            }
         }
-        if(elev_get_button_signal(BUTTON_CALL_DOWN,i)){
-            elev_set_button_lamp(BUTTON_CALL_DOWN,i,1);
-            arr_ned[i] = 1;
-            return 1;
-        }
-        if(elev_get_button_signal(BUTTON_COMMAND,i)){
-            elev_set_button_lamp(BUTTON_COMMAND,i,1);
-            arr_destination[i] = 1;
-            return 1;
-        } 
     }
     return 0;
 }
@@ -116,7 +140,7 @@ elev_motor_direction_t get_direction(int floor){
         return direction;
         }
     else{
-        printf("Get_direction fault");
+        printf("Get_direction fault\n");
         return direction;
     }
 }
