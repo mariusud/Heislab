@@ -1,3 +1,7 @@
+
+extern elev_button_type_t direction;
+
+
 /**
  Needs to be running all the time. 
  if a button is pushed, adds the order to the floor 
@@ -40,3 +44,14 @@ void delete_all_orders();
 */
 int get_direction(int floor);
 
+
+
+/**
+  checks the destination array
+  if array empty returns -1, else returns floor 
+*/
+int check_arr_destination();
+
+
+int order_above(int floor);
+int order_below(int floor);

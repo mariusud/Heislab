@@ -6,7 +6,10 @@
 static int arr_opp[N_FLOORS-1]; 
 static int arr_ned[N_FLOORS-1]; // ned og opp er for eksterne heistilkallinger
 static int arr_destination[N_FLOORS-1];
+
+elev_button_type_t direction;
 // int floor;
+int order;
 
 
 int check_queue(){
@@ -44,10 +47,6 @@ int check_queue_floor(int floor){
     }
 }
 
-int should_stop(int floor){
-
-}
-
 
 void delete_floor_order(int floor){
     // delete lamps aswell
@@ -64,26 +63,39 @@ void delete_all_orders(){
     }
 }
 
-int get_direction(int floor){
+
+int order_above(int floor){
     int i;
-    for (i = 0; i < N_FLOORS;i++){
-        if (check_queue_floor(i)){
-            // if a direction is already set, follow until  no more orders in that direction
-            // if no set direction do the below
-            if (i < floor){
-                return -1;
-            }
-            if (i == floor){
-                return 0;
-            }
-            if (i > floor){
-                return 1;
-            }
+    for (i =floor; i < N_FLOORS; i++){
+        if (arr_destination[i] || arr_ned[i] || arr_opp[i]){
+            return 1;
+        } else{
+            return 0;
+        }
+    }
+}
+
+int order_below(int floor){
+    int i;
+    for (i = 0; i < floor; i++){
+        if (arr_destination[i] || arr_ned[i] || arr_opp[i]){
+            return 1;
+        } else{
+            return 0;
         }
     }
 }
 
 
 
-//problem: if direction set down, and new order pops up above. how to make it finish order to go all the way down, not just stop at one floor.
-// arr_direction needs to have priority med andre ord
+
+elev_motor_direction_t get_direction(int floor){
+    if ( order_above(floor) && direction == DIRN_UP){return DIRN_UP;}
+    else if (order_below(floor) && direction == DIRN_DOWN){return DIRN_DOWN;}
+    else if (order_above(floor)){return DIRN_UP;}
+    else if (order_below(floor)){return DIRN_DOWN;}
+    else if ((floor == -1) || !(floor)){
+        printf("Someting wong");
+        return DIRN_STOP;
+        }
+}
