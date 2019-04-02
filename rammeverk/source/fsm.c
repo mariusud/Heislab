@@ -5,35 +5,22 @@
 #include <stdlib.h>
 int last_floor;
 
-static State state;
 
 void FSM_init(){
     //checks if elevator is at a floor or inbetween
-    if(elev_get_floor_sensor_signal != -1){
-        FSM_idle();
+    if(elev_get_floor_sensor_signal() != -1){
+        //FSM_idle();
+        elev_set_motor_direction(DIRN_STOP);
     }else{
         elev_set_motor_direction(DIRN_DOWN);
-        while(elev_get_floor_sensor_signal == -1){}
-        FSM_idle();
-        return 1;
+        while(elev_get_floor_sensor_signal() == -1){}//legg til stop button?
+        //FSM_idle();
+        elev_set_motor_direction(DIRN_STOP);
     }
-        
-
 }
-
-
-void FSM_set_state(State st){
-    state = st;
-}
-
-State FSM_get_state(){
-    return state;
-}
-
 
 void FSM_idle(){
     elev_set_motor_direction(0);
-    while(!check_queue()){}
     //sjekker om det kommer en ordre i samme etasje eller en annen
     if (check_queue_floor(elev_get_floor_sensor_signal())){
         FSM_set_state(DOORS_OPEN);
@@ -43,9 +30,9 @@ void FSM_idle(){
 }
 
 void FSM_drive(){
-    last_floor = elev_get_floor_sensor_signal();
+    //last_floor = elev_get_floor_sensor_signal();
     elev_set_motor_direction(get_direction());
-    while(elev_get_floor_sensor_signal == -1){}
+    //while(elev_get_floor_sensor_signal == -1){}
     if(check_queue_floor(elev_get_floor_sensor_signal())){
         elev_set_motor_direction(0);
         FSM_set_state(DOORS_OPEN);
@@ -62,3 +49,5 @@ void FSM_doors_open(){
 //gjør ferdig doorsopen
 //legg til lys
 //legg til doxygen
+
+int last_floor;

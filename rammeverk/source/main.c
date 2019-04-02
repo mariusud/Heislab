@@ -1,4 +1,5 @@
 #include "elev.h"
+#include "fsm.h"
 #include <stdio.h>
 
 
@@ -10,23 +11,33 @@ int main() {
     }
 
     printf("Press STOP button to stop elevator and exit program.\n");
-
-    elev_set_motor_direction(DIRN_UP);
-
+    FSM_init();
+    elev_set_button_lamp(BUTTON_COMMAND, elev_get_floor_sensor_signal(), 1);
+    /*
+    State state = IDLE;
+  
     while (1) {
-        // Change direction when we reach top/bottom floor
-        if (elev_get_floor_sensor_signal() == N_FLOORS - 1) {
-            elev_set_motor_direction(DIRN_DOWN);
-        } else if (elev_get_floor_sensor_signal() == 0) {
-            elev_set_motor_direction(DIRN_UP);
-        }
+        switch (state){
+            case IDLE:
 
-        // Stop elevator and exit program if the stop button is pressed
-        if (elev_get_stop_signal()) {
-            elev_set_motor_direction(DIRN_STOP);
-            break;
+            case DRIVE:
+                //finds out which direction to drive in
+                elev_set_motor_direction(get_direction(elev_get_floor_sensor_signal()));
+                //checks if the elevator is in a floor and has orders in that floor
+                if ((elev_get_floor_sensor_signal() != -1) && check_queue_floor(elev_get_floor_sensor_signal())){
+                    elev_set_motor_direction(DIRN_STOP);
+                    state = DOORS_OPEN;
+                }
+                break;
+            case DOORS_OPEN:
+
+
+            case EMERGENCY_STOP:
+
         }
+    //if stop ()
+
     }
-
+    */
     return 0;
 }
