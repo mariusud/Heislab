@@ -22,7 +22,6 @@ int main() {
     State state = IDLE;
     int current_floor;
     int last_floor;
-    elev_motor_direction_t current_direction;
   
 
     while (1) {
@@ -47,8 +46,6 @@ int main() {
                         elev_set_motor_direction(direction);
                         int sleeper = 1000000;
                         while(--sleeper);
-
-                        current_direction = direction;
                         last_floor = current_floor;
                         state = DRIVE;
                     }
@@ -74,13 +71,15 @@ int main() {
                 break;
 
             case DOORS_OPEN:
-                printf("doors");
+                //printf("doors");
                 if(current_floor == -1){
                     printf("heisen er ikke i en etasje");
                 }
                 //timer
                 //elev_set_door_open_lamp(int value);
                 //timer
+                delete_floor_order(current_floor);
+
                 if(check_queue()){
                     //finds out which direction to drive in
                     elev_set_motor_direction(get_direction(current_floor));

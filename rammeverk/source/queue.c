@@ -105,24 +105,21 @@ void delete_all_orders(){
 
 int order_above(int floor){
     int i;
-    for (i =floor; i < N_FLOORS; i++){
-        if (arr_destination[i] || arr_ned[i] || arr_opp[i]){
-            return 1;
-        } else{
-            return 0;
+    for (i=floor; i < N_FLOORS; i++){
+        if (arr_destination[i]){return 1;} 
+        if (arr_ned[i]){return 1;} 
+        if (arr_opp[i]){return 1;}    
         }
-    }
     return 0;
 }
 
+
 int order_below(int floor){
     int i;
-    for (i = 0; i < floor; i++){
-        if (arr_destination[i] || arr_ned[i] || arr_opp[i]){
-            return 1;
-        } else{
-            return 0;
-        }
+    for (i = 0; i < floor+1; i++){
+         if (arr_destination[i]){return 1;} 
+        if (arr_ned[i]){return 1;} 
+        if (arr_opp[i]){return 1;}    
     }
     return 0;
 }
@@ -140,7 +137,9 @@ elev_motor_direction_t get_direction(int floor){
         return direction;
         }
     else{
-        printf("Get_direction fault\n");
+        printf("Get_direction has no action,\n");
+         printf("order above: %d\n",(order_above(floor)));
+         printf("order below: %d\n",(order_below(floor)));
         return direction;
     }
 }
