@@ -37,15 +37,14 @@ int main() {
                     //checks if order is in current floor
                     if(check_queue_floor(current_floor)){
                         state = DOORS_OPEN;
-                        printf("Kommer inn hit");
                     }else{
                         //finds out which direction to drive in
                          printf("current floor: %d\n", (current_floor));
                         direction = get_direction(current_floor);
                          printf("current dir: %d\n", get_direction(current_floor));
                         elev_set_motor_direction(direction);
-                        int sleeper = 1000000;
-                        while(--sleeper);
+                        //int sleeper = 1000000;
+                        //while(--sleeper);
                         last_floor = current_floor;
                         state = DRIVE;
                     }
@@ -58,9 +57,10 @@ int main() {
                /* printf("current floor: %d\n", current_floor);
                  printf("dir: %d\n", direction);
                printf("check floor: %d\n", check_queue_floor(current_floor));
-*/
-                if ((current_floor != -1) && check_queue_floor(current_floor)){
+*/              printf("check floor: %d \n ",(check_queue_floor(current_floor)));
+                if (check_queue_floor(current_floor)){
                     //stop elevator
+                    printf("Kommer inn til drive switch");
                     elev_set_motor_direction(DIRN_STOP);
                     //turns off lights at last floor
                     elev_set_button_lamp(BUTTON_COMMAND, last_floor, 0);
@@ -69,27 +69,29 @@ int main() {
                     state = DOORS_OPEN;
                 }
                 break;
-
+            //printf("current floor: %d \n", (current_floor));
             case DOORS_OPEN:
-                //printf("doors");
+            
+                printf("doors");
                 if(current_floor == -1){
                     printf("heisen er ikke i en etasje");
                 }
                 //timer
                 //elev_set_door_open_lamp(int value);
                 //timer
-                delete_floor_order(current_floor);
 
                 if(check_queue()){
                     //finds out which direction to drive in
                     elev_set_motor_direction(get_direction(current_floor));
                     //current_direction = get_direction(current_floor);
                     //Drive
+                    printf("Kommer inn hit");
                     state = DRIVE;
                 }else{
                     //Idle
                     state = IDLE;
                 }
+                delete_floor_order(current_floor);
 
             case EMERGENCY_STOP:
                 for(int i = 0; i < 4; i++)

@@ -22,7 +22,7 @@ void init_arrays(){
 
 int check_queue(){
     int i;
-    for (i=1; i < N_FLOORS; i++){
+    for (i=0; i < N_FLOORS; i++){
         if (i == 0){
             if(elev_get_button_signal(BUTTON_CALL_UP,i)){
                 elev_set_button_lamp(BUTTON_CALL_UP,i,1);
