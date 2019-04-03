@@ -1,13 +1,12 @@
-#include "queue.h"
 #include "elev.h"
+#include "queue.h"
 #include <stdio.h>
 
 
 static int arr_opp[N_FLOORS]; 
-static int arr_ned[N_FLOORS]; // ned og opp er for eksterne heistilkallinger
+static int arr_ned[N_FLOORS]; 
 static int arr_destination[N_FLOORS];
-
-elev_button_type_t direction;
+elev_motor_direction_t direction;
 // int floor;
 
 
@@ -23,28 +22,54 @@ void init_arrays(){
 
 int check_queue(){
     int i;
-    for (i=0; i < N_FLOORS; i++){
-        if(elev_get_button_signal(BUTTON_CALL_UP,i)){
-            elev_set_button_lamp(BUTTON_CALL_UP,i,1);
-            arr_opp[i] = 1;         
-            return 1;
+    for (i=1; i < N_FLOORS; i++){
+        if (i == 0){
+            if(elev_get_button_signal(BUTTON_CALL_UP,i)){
+                elev_set_button_lamp(BUTTON_CALL_UP,i,1);
+                arr_opp[i] = 1;         
+                return 1;
+            }
+            if(elev_get_button_signal(BUTTON_COMMAND,i)){
+                elev_set_button_lamp(BUTTON_COMMAND,i,1);
+                arr_destination[i] = 1;
+                return 1;
+                }
+            }
+        if (i == 3){
+            if(elev_get_button_signal(BUTTON_CALL_DOWN,i)){
+                elev_set_button_lamp(BUTTON_CALL_DOWN,i,1);
+                arr_ned[i] = 1;
+                return 1;
+            }
+            if(elev_get_button_signal(BUTTON_COMMAND,i)){
+                elev_set_button_lamp(BUTTON_COMMAND,i,1);
+                arr_destination[i] = 1;
+                return 1;
+            }
+        } else{
+            if(elev_get_button_signal(BUTTON_CALL_UP,i)){
+                elev_set_button_lamp(BUTTON_CALL_UP,i,1);
+                arr_opp[i] = 1;         
+                return 1;
+                }
+            if(elev_get_button_signal(BUTTON_CALL_DOWN,i)){
+                elev_set_button_lamp(BUTTON_CALL_DOWN,i,1);
+                arr_ned[i] = 1;
+                return 1;
+            }
+            if(elev_get_button_signal(BUTTON_COMMAND,i)){
+                elev_set_button_lamp(BUTTON_COMMAND,i,1);
+                arr_destination[i] = 1;
+                return 1;
+            }
         }
-        if(elev_get_button_signal(BUTTON_CALL_DOWN,i)){
-            elev_set_button_lamp(BUTTON_CALL_DOWN,i,1);
-            arr_ned[i] = 1;
-            return 1;
-        }
-        if(elev_get_button_signal(BUTTON_COMMAND,i)){
-            elev_set_button_lamp(BUTTON_COMMAND,i,1);
-            arr_destination[i] = 1;
-            return 1;
-        }
-        else{return 0;}  
     }
+    return 0;
 }
 
 
 int check_queue_floor(int floor){
+    if (floor == -1){return 0;}
     if (arr_opp[floor]){
         return 1;
     }
@@ -80,24 +105,23 @@ void delete_all_orders(){
 
 int order_above(int floor){
     int i;
-    for (i =floor; i < N_FLOORS; i++){
-        if (arr_destination[i] || arr_ned[i] || arr_opp[i]){
-            return 1;
-        } else{
-            return 0;
+    for (i=floor; i < N_FLOORS; i++){
+        if (arr_destination[i]){return 1;} 
+        if (arr_ned[i]){return 1;} 
+        if (arr_opp[i]){return 1;}    
         }
-    }
+    return 0;
 }
+
 
 int order_below(int floor){
     int i;
-    for (i = 0; i < floor; i++){
-        if (arr_destination[i] || arr_ned[i] || arr_opp[i]){
-            return 1;
-        } else{
-            return 0;
-        }
+    for (i = 0; i < floor+1; i++){
+         if (arr_destination[i]){return 1;} 
+        if (arr_ned[i]){return 1;} 
+        if (arr_opp[i]){return 1;}    
     }
+    return 0;
 }
 
 
@@ -108,8 +132,14 @@ elev_motor_direction_t get_direction(int floor){
     else if (order_below(floor) && direction == DIRN_DOWN){return DIRN_DOWN;}
     else if (order_above(floor)){return DIRN_UP;}
     else if (order_below(floor)){return DIRN_DOWN;}
-    else if ((floor == -1) || !(floor)){
-        printf("Someting wong");
-        return DIRN_STOP;
+    else if (floor == -1){
+        printf("Unable to find floor, will continue in last known direction");
+        return direction;
         }
+    else{
+        printf("Get_direction has no action,\n");
+         printf("order above: %d\n",(order_above(floor)));
+         printf("order below: %d\n",(order_below(floor)));
+        return direction;
+    }
 }
