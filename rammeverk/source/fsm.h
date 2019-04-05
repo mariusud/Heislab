@@ -14,7 +14,6 @@ typedef enum states{
 
 /**
   Checks if elevator is in a floor and sends it to idle or sends it down to the next floor and puts it in idle
-  @return Non-zero on success, 0 on failure.
 */
 void FSM_init();
 

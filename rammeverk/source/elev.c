@@ -10,6 +10,7 @@
 
 #include <assert.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 // Number of signals and lamps on a per-floor basis (excl sensor)
 #define N_BUTTONS 3
@@ -104,9 +105,11 @@ int elev_get_floor_sensor_signal(void) {
 }
 
 void elev_set_floor_indicator(int floor) {
-    assert(floor >= 0);
-    assert(floor < N_FLOORS);
-
+    //assert(floor >= 0);
+    //assert(floor < N_FLOORS);
+    if(floor < 0 || floor > N_FLOORS){
+        printf("Floor out of bounds. \n");
+    }
     // Binary encoding. One light must always be on.
     if (floor & 0x02)
         io_set_bit(LIGHT_FLOOR_IND1);
@@ -126,6 +129,9 @@ int elev_get_button_signal(elev_button_type_t button, int floor) {
     assert(!(button == BUTTON_CALL_DOWN && floor == 0));
     assert(button == BUTTON_CALL_UP || button == BUTTON_CALL_DOWN || button == BUTTON_COMMAND);
     */
+    if(floor < 0 || floor > N_FLOORS){
+        printf("Floor out of bounds. \n");
+    }
     if (io_read_bit(button_channel_matrix[floor][button]))
         return 1;
     else
@@ -133,12 +139,13 @@ int elev_get_button_signal(elev_button_type_t button, int floor) {
 }
 
 void elev_set_button_lamp(elev_button_type_t button, int floor, int value) {
-    /*assert(floor >= 0);
-    assert(floor < N_FLOORS);
-    assert(!(button == BUTTON_CALL_UP && floor == N_FLOORS - 1));
-    assert(!(button == BUTTON_CALL_DOWN && floor == 0));
-    assert(button == BUTTON_CALL_UP || button == BUTTON_CALL_DOWN || button == BUTTON_COMMAND);
-    */
+    //assert(floor < N_FLOORS);
+    //assert(!(button == BUTTON_CALL_UP && floor == N_FLOORS - 1));
+    //assert(!(button == BUTTON_CALL_DOWN && floor == 0));
+    //assert(button == BUTTON_CALL_UP || button == BUTTON_CALL_DOWN || button == BUTTON_COMMAND);
+    if(floor < 0 || floor > N_FLOORS){
+        printf("Floor out of bounds. \n");
+    }
     if (value)
         io_set_bit(lamp_channel_matrix[floor][button]);
     else

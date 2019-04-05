@@ -20,6 +20,15 @@ void init_arrays(){
     }
 }
 
+int check_orders(){
+    for(int i = 0; i < N_FLOORS; i++){
+        if(arr_destination[i]) return 1;
+        if(arr_ned[i]) return 1;
+        if(arr_opp[i]) return 1;
+    }
+    return 0;
+}
+
 int check_queue(){
     int i;
     for (i=0; i < N_FLOORS; i++){
@@ -115,16 +124,25 @@ int order_above(int floor){
 
 
 int order_below(int floor){
-    int i;
-    for (i = 0; i < floor+1; i++){
-         if (arr_destination[i]){return 1;} 
+    for (int i = 0; i < floor+1; i++){
+        if (arr_destination[i]){return 1;} 
         if (arr_ned[i]){return 1;} 
         if (arr_opp[i]){return 1;}    
     }
     return 0;
 }
 
+int order_floor_direction_down(int floor){
+    if (arr_destination[floor]){return 1;} 
+    if (arr_ned[floor]){return 1;} 
+    return 0;
+}
 
+int order_floor_direction_up(int floor){
+    if (arr_destination[floor]){return 1;} 
+    if (arr_opp[floor]){return 1;} 
+    return 0;
+}
 
 
 elev_motor_direction_t get_direction(int floor){

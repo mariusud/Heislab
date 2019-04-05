@@ -14,75 +14,69 @@ int main() {
         return 1;
     }
 
-    printf("Press STOP button to stop elevator and exit program.\n");
     //initializes the elevator
     FSM_init();
-
-    elev_set_button_lamp(BUTTON_COMMAND, elev_get_floor_sensor_signal(), 1);
-
     init_arrays();
     State state = IDLE;
+    //variables declared before while-loop
     int current_floor;
     int last_floor;
-  
 
     while (1) {
+        //updates current_floor continousley
         current_floor = elev_get_floor_sensor_signal();
         //updates queue continuosely
         check_queue();
         switch (state){
+
             case IDLE:
-                //printf("idle");
                 //checks if there are any orders
-                printf("check floor: %d \n ",(check_queue_floor(current_floor)));
-                if (check_queue()){
-                    printf("queue");
+                if (check_orders()){
                     //checks if order is in current floor
                     if(check_queue_floor(current_floor)){
                         state = DOORS_OPEN;
                     }else{
                         //finds out which direction to drive in
-                         printf("current floor: %d\n", (current_floor));
-                        direction = get_direction(current_floor);
-                         printf("current dir: %d\n", get_direction(current_floor));
-                        elev_set_motor_direction(direction);
-                        //int sleeper = 1000000;
-                        //while(--sleeper);
-                        last_floor = current_floor;
-                        state = DRIVE;
+                        if(direction == -1){
+                            direction = get_direction(last_floor);
+                            elev_set_motor_direction(direction);
+                            state = DRIVE; 
+                        }else{
+                            direction = get_direction(current_floor);
+                            elev_set_motor_direction(direction);
+                            last_floor = current_floor;
+                            state = DRIVE;
+                        }
                     }
                 }
                 break;
 
             case DRIVE:
-                //printf("drive");
-                //checks if the elevator is in a floor and has orders in that floorprin
-               /* printf("current floor: %d\n", current_floor);
-                 printf("dir: %d\n", direction);
-               printf("check floor: %d\n", check_queue_floor(current_floor));
-*/              printf("check floor: %d \n ",(check_queue_floor(current_floor)));
+                if(elev_get_floor_sensor_signal() !=-1){
+                    elev_set_floor_indicator(current_floor);
+                }                
                 if (check_queue_floor(current_floor)){
-                    printf("Kommer inn til drive switch");
-                    elev_set_motor_direction(DIRN_STOP);
-                    //turns off lights at last floor
-                    elev_set_button_lamp(BUTTON_COMMAND, last_floor, 0);
-                    //Turns on light on current floor
-                    elev_set_button_lamp(BUTTON_COMMAND, current_floor, 1);
-                    state = DOORS_OPEN;
+                    
+                    if((direction == DIRN_DOWN && order_floor_direction_down(current_floor ) )|| ( direction == DIRN_DOWN && current_floor == 0)){
+                        elev_set_motor_direction(DIRN_STOP);
+                        state = DOORS_OPEN;
+                    }
+                    else if((direction == DIRN_UP && order_floor_direction_up(current_floor) )|| ( direction == DIRN_UP && current_floor == 3)){
+                        elev_set_motor_direction(DIRN_STOP);
+                        state = DOORS_OPEN;
+                    } 
                 }
                 break;
-            //printf("current floor: %d \n", (current_floor));
+
             case DOORS_OPEN:
-            
-                //printf("doors");
                 if(current_floor == -1){
-                    printf("heisen er ikke i en etasje");
+                    FSM_init();
                 }
                 if(!is_timer_on()){
                     //turns on timer if it is not already on
                     timer_start();
                 }
-                delete_floor_order(current_floor);
+                delete_floor_order(current_floor); //FIKS HER  FIKS HER    FIKS HER            FIKS HER        FIKS HER
                 //turns on doorlamp
                 elev_set_door_open_lamp(1);
                 //checks if timer has exceeded three seconds
@@ -91,37 +85,56 @@ int main() {
                     elev_set_door_open_lamp(0);
                     turn_off_timer();
                     //checks if there are any more orders
-                    if(check_queue()){
-                        printf("math checks out");
+                    if(check_orders()){
+                        last_floor = current_floor;
                         //finds out which direction to drive in
-                        elev_set_motor_direction(get_direction(current_floor));
-                        //current_direction = get_direction(current_floor);
-                        //Drive
+                        direction = get_direction(current_floor);
+                        elev_set_motor_direction(direction);
                         state = DRIVE;
                     }else{
                         //Idle
                         state = IDLE;
-                }
-                }
-                //elev_set_door_open_lamp(int value);
-                //timer
-
-                
-                
-
-            case EMERGENCY_STOP:
-                for(int i = 0; i < 4; i++)
-                {
-                    elev_set_button_lamp(BUTTON_COMMAND, i, 1);
-                }
-                
+                }}
                 break;
 
+            case EMERGENCY_STOP:
+                elev_set_motor_direction(DIRN_STOP);
+                delete_all_orders();
+                while(elev_get_stop_signal()){
+                    elev_set_stop_lamp(1);
+                    if (current_floor != -1){
+                        elev_set_door_open_lamp(1);
+                    }
+                }
+                elev_set_stop_lamp(0);
+                //this part turns on the doorlamp if the elevator is in a floor
+                if(current_floor != -1){
+                    if(!is_timer_on()){
+                    timer_start();
+                    }
+                    delete_floor_order(current_floor);
+                    elev_set_door_open_lamp(1);
+                    if(timer_three_seconds()){
+                        elev_set_door_open_lamp(0);
+                        turn_off_timer();
+                        state = IDLE;
+                }
+                //this part is if the elevator is not in a floor
+                }else{
+                    if(elev_get_stop_signal()){
+                        elev_set_motor_direction(DIRN_STOP);
+                        state = EMERGENCY_STOP;
+                    }else{
+                        elev_set_motor_direction(DIRN_STOP);
+                        state = IDLE;
+                    }
+                }
+                break;
         }
         if (elev_get_stop_signal()){
+            elev_set_motor_direction(DIRN_STOP);
             state = EMERGENCY_STOP;
         }
-
     }
     return 0;
 }

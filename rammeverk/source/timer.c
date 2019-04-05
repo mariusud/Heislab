@@ -7,7 +7,7 @@ void timer_start() {
 }
 
 int timer_three_seconds(){
-    if ((time(NULL)-timer)>3){
+    if ((time(NULL)-timer)>2){
         return 1;
     }else{
         return 0;

@@ -6,9 +6,16 @@ extern elev_motor_direction_t direction;
   @brief initilializes queue arrays.
 */
 void init_arrays();
+
+/**
+ @brief Checks if there are any orders at all
+@returns 1 if there IS an order, 0 else
+*/
+
+int check_orders();
 /**
  @brief If a button is pushed, adds the order to the floor. Needs to be running all the time. 
-@returns 1 if there IS an order, 0 else
+@returns 1 if someone is pushing a button, 0 else
 */
 int check_queue();
 
@@ -39,6 +46,19 @@ int order_above(int floor);
   @returns 1 if true, 0 else
 */
 int order_below(int floor);
+
+/**
+@brief checks if there any orders that's going down or from inside in the input floor-
+@returns 1 if true, 0 else
+*/
+int order_floor_direction_down(int floor);
+
+/**
+@brief checks if there any orders that's going up or from inside in the input floor-
+@returns 1 if true, 0 else
+*/
+int order_floor_direction_up(int floor);
+
 
 /**
   @brief tells the elevator which way to go.
