@@ -146,6 +146,7 @@ int order_floor_direction_up(int floor){
 
 
 elev_motor_direction_t get_direction(int floor){
+    if ((floor == 3) && (direction == DIRN_STOP)) {return DIRN_UP;}
     if ( order_above(floor) && direction == DIRN_UP){return DIRN_UP;}
     else if (order_below(floor) && direction == DIRN_DOWN){return DIRN_DOWN;}
     else if (order_above(floor)){return DIRN_UP;}

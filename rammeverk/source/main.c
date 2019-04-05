@@ -20,6 +20,7 @@ int main() {
     //variables declared before while-loop
     int current_floor;
     int last_floor;
+    int last_direction;
     int last_state;    //0-3 // emg is 3
     while (1) {
 
@@ -31,6 +32,7 @@ int main() {
 
         if (elev_get_stop_signal()){
             elev_set_motor_direction(DIRN_STOP);
+            printf("kom inn i den første løkka aka moren til håkon");
             direction = DIRN_STOP;
             last_state = 3;
             state = EMERGENCY_STOP;
@@ -38,8 +40,26 @@ int main() {
 
         switch (state){
             case IDLE:
-                direction = DIRN_STOP;
                 //checks if there are any orders
+                printf("idle \n");
+                printf("current floor: %d",current_floor);
+                printf("direction: %d", direction);
+                if ((current_floor == -1) && (direction == DIRN_STOP)){
+                    printf("FUCKED IN THE ASS");
+                    elev_set_motor_direction(DIRN_STOP);
+                    if (order_above(last_floor-(last_direction==DIRN_DOWN))){
+                        direction = DIRN_UP;
+                        elev_set_motor_direction(direction);  
+                        state = DRIVE;
+                    } 
+                    else if(check_queue()){
+                        direction = DIRN_DOWN;
+                        elev_set_motor_direction(direction); 
+                        state = DRIVE;
+                    }
+
+                    break;
+                    }
                 if (check_orders()){
                     //checks if order is in current floor
                     if(check_queue_floor(current_floor)){
@@ -59,11 +79,14 @@ int main() {
                             last_floor = current_floor;
                             state = DRIVE;
                         }
-                    } printf("HERE");
+                    } last_floor = current_floor;
                 }
                 break;
 
             case DRIVE:
+                //printf("DRIVE \n");
+                //printf("DIRECTION: %d \n", direction);
+                //printf("floor: %d \n ", current_floor);
                 last_state = 1;
                 if(elev_get_floor_sensor_signal() !=-1){
                     elev_set_floor_indicator(current_floor);
@@ -81,6 +104,7 @@ int main() {
                 break;
 
             case DOORS_OPEN:
+                last_floor = current_floor;
                 if(current_floor == -1){
                     FSM_init();
                 }
@@ -111,9 +135,12 @@ int main() {
                 break;
 
             case EMERGENCY_STOP:
+                last_direction = direction;
                 elev_set_motor_direction(DIRN_STOP);
+                direction = DIRN_STOP;
                 delete_all_orders();
                 while(elev_get_stop_signal()){
+                    printf("EMERGENDCY button pressed \n");
                     elev_set_stop_lamp(1);
                     if (current_floor != -1){
                         elev_set_door_open_lamp(1);
