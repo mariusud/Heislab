@@ -108,7 +108,7 @@ void elev_set_floor_indicator(int floor) {
     //assert(floor >= 0);
     //assert(floor < N_FLOORS);
     if(floor < 0 || floor > N_FLOORS){
-        printf("Floor out of bounds. \n");
+        printf("Floor out of bounds. %d", floor);
     }
     // Binary encoding. One light must always be on.
     if (floor & 0x02)
@@ -130,7 +130,7 @@ int elev_get_button_signal(elev_button_type_t button, int floor) {
     assert(button == BUTTON_CALL_UP || button == BUTTON_CALL_DOWN || button == BUTTON_COMMAND);
     */
     if(floor < 0 || floor > N_FLOORS){
-        printf("Floor out of bounds. \n");
+        printf("Floor out of bounds. %d", floor);
     }
     if (io_read_bit(button_channel_matrix[floor][button]))
         return 1;

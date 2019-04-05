@@ -13,7 +13,6 @@ int main() {
         printf("Unable to initialize elevator hardware!\n");
         return 1;
     }
-
     //initializes the elevator
     FSM_init();
     init_arrays();
@@ -21,15 +20,25 @@ int main() {
     //variables declared before while-loop
     int current_floor;
     int last_floor;
-
+    int last_state;    //0-3 // emg is 3
     while (1) {
+
+        printf("state %d\n\n\n", state);
         //updates current_floor continousley
         current_floor = elev_get_floor_sensor_signal();
         //updates queue continuosely
         check_queue();
-        switch (state){
 
+        if (elev_get_stop_signal()){
+            elev_set_motor_direction(DIRN_STOP);
+            direction = DIRN_STOP;
+            last_state = 3;
+            state = EMERGENCY_STOP;
+        }
+
+        switch (state){
             case IDLE:
+                direction = DIRN_STOP;
                 //checks if there are any orders
                 if (check_orders()){
                     //checks if order is in current floor
@@ -41,21 +50,24 @@ int main() {
                             direction = get_direction(last_floor);
                             elev_set_motor_direction(direction);
                             state = DRIVE; 
+                            
+                            
+                            
                         }else{
                             direction = get_direction(current_floor);
                             elev_set_motor_direction(direction);
                             last_floor = current_floor;
                             state = DRIVE;
                         }
-                    }
+                    } printf("HERE");
                 }
                 break;
 
             case DRIVE:
+                last_state = 1;
                 if(elev_get_floor_sensor_signal() !=-1){
                     elev_set_floor_indicator(current_floor);
                 }
-                printf("order above %d\n", order_above(current_floor));
                 if (check_queue_floor(current_floor)){
                     if((direction == DIRN_DOWN) && (order_floor_direction_down(current_floor) || (current_floor == 0) || (!order_below(current_floor)))){
                         elev_set_motor_direction(DIRN_STOP);
@@ -95,6 +107,7 @@ int main() {
                         //Idle
                         state = IDLE;
                 }}
+                last_state = 2;
                 break;
 
             case EMERGENCY_STOP:
@@ -122,19 +135,16 @@ int main() {
                 //this part is if the elevator is not in a floor
                 }else{
                     if(elev_get_stop_signal()){
-                        elev_set_motor_direction(DIRN_STOP);
                         state = EMERGENCY_STOP;
                     }else{
-                        elev_set_motor_direction(DIRN_STOP);
+
                         state = IDLE;
                     }
                 }
+                last_state = 3;
                 break;
         }
-        if (elev_get_stop_signal()){
-            elev_set_motor_direction(DIRN_STOP);
-            state = EMERGENCY_STOP;
-        }
+
     }
     return 0;
 }
