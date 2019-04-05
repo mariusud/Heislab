@@ -24,16 +24,17 @@ int main() {
     int last_state;    //0-3 // emg is 3
     while (1) {
 
-        printf("state %d\n\n\n", state);
+        //printf("state %d\n\n\n", state);
         //updates current_floor continousley
         current_floor = elev_get_floor_sensor_signal();
         //updates queue continuosely
         check_queue();
+        if (elev_get_floor_sensor_signal() != -1){ last_floor = elev_get_floor_sensor_signal();}
 
         if (elev_get_stop_signal()){
             elev_set_motor_direction(DIRN_STOP);
             printf("kom inn i den første løkka aka moren til håkon");
-            direction = DIRN_STOP;
+            //direction = DIRN_STOP;
             last_state = 3;
             state = EMERGENCY_STOP;
         }
@@ -42,24 +43,29 @@ int main() {
             case IDLE:
                 //checks if there are any orders
                 printf("idle \n");
-                printf("current floor: %d",current_floor);
-                printf("direction: %d", direction);
+                //printf("current floor: %d",current_floor);
+                //printf("direction: %d", direction);
                 if ((current_floor == -1) && (direction == DIRN_STOP)){
-                    printf("FUCKED IN THE ASS");
+                    printf("FUCKED IN THE ASS\n");
                     elev_set_motor_direction(DIRN_STOP);
+                    printf("last floor: %d\n",last_floor);
+                    printf("last direction: %d\n",last_direction);
                     if (order_above(last_floor-(last_direction==DIRN_DOWN))){
+                        printf("\n\n\n\n\n\nlivet er ikke så fett med heis %d\n\n\n\n", order_above(last_floor-(last_direction==DIRN_DOWN)));
                         direction = DIRN_UP;
+                        printf("DIRUP \n\n\n\n\n\n\n");
                         elev_set_motor_direction(direction);  
                         state = DRIVE;
                     } 
                     else if(check_queue()){
+                        printf("marius");
                         direction = DIRN_DOWN;
                         elev_set_motor_direction(direction); 
                         state = DRIVE;
                     }
 
                     break;
-                    }
+                }
                 if (check_orders()){
                     //checks if order is in current floor
                     if(check_queue_floor(current_floor)){
@@ -76,10 +82,10 @@ int main() {
                         }else{
                             direction = get_direction(current_floor);
                             elev_set_motor_direction(direction);
-                            last_floor = current_floor;
+                            //last_floor = current_floor;
                             state = DRIVE;
                         }
-                    } last_floor = current_floor;
+                    } //last_floor = current_floor;
                 }
                 break;
 
@@ -122,7 +128,7 @@ int main() {
                     turn_off_timer();
                     //checks if there are any more orders
                     if(check_orders()){
-                        last_floor = current_floor;
+                        //last_floor = current_floor;
                         //finds out which direction to drive in
                         direction = get_direction(current_floor);
                         elev_set_motor_direction(direction);
