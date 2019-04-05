@@ -47,10 +47,10 @@ int main() {
                     printf("FUCKED IN THE ASS\n");
                     elev_set_motor_direction(DIRN_STOP);
                     printf("last floor: %d\n",last_floor);
-                    printf("last direction: %d\n",last_direction);
-                    printf("heisknull %d", order_above(last_floor-(last_direction==DIRN_DOWN)));
-                    if (order_above(last_floor-(last_direction==DIRN_DOWN))){
-                        printf("\n\n\n\n\n\nlivet er ikke så fett med heis %d\n\n\n\n", order_above(last_floor-(last_direction==DIRN_DOWN)));
+                    //printf("last direction: %d\n",last_direction);
+                    //printf("heisknull %d", order_above(last_floor-(last_direction==DIRN_DOWN)));
+                    if ( check_queue() && order_above(last_floor-(last_direction==DIRN_DOWN))) {
+                        //printf("\n\n\n\n\n\nlivet er ikke så fett med heis %d\n\n\n\n", order_above(last_floor-(last_direction==DIRN_DOWN)));
                         direction = DIRN_UP;
                         printf("DIRUP \n\n\n\n\n\n\n");
                         elev_set_motor_direction(direction);  
@@ -62,6 +62,7 @@ int main() {
                         elev_set_motor_direction(direction); 
                         state = DRIVE;
                     }
+                    else if (!check_queue()){ printf("NO QUEEUEUEU");}
 
                     break;
                 }
@@ -155,15 +156,14 @@ int main() {
                 //this part turns on the doorlamp if the elevator is in a floor
                 if(current_floor != -1){
                     if(!is_timer_on()){
-                    timer_start();
+                        timer_start();
                     }
-                    delete_floor_order(current_floor);
                     elev_set_door_open_lamp(1);
                     if(timer_three_seconds()){
                         elev_set_door_open_lamp(0);
                         turn_off_timer();
                         state = IDLE;
-                }
+                    }
                 //this part is if the elevator is not in a floor
                 }else{
                     if(elev_get_stop_signal()){
