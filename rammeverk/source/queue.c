@@ -117,8 +117,13 @@ int order_above(int floor){
     for (i=floor+1; i < N_FLOORS; i++){
         if (arr_destination[i]){return 1;} 
         if (arr_ned[i]){return 1;} 
-        if (arr_opp[i]){return 1;}    
+        if (arr_opp[i]){return 1;}
+        printf(" arr above: %d \n", arr_opp[i]);
+        printf(" arr below: %d \n", arr_ned[i]);
+        printf(" arr dest: %d \n", arr_destination[i]);
+
         }
+    printf(" arr above: %d", arr_opp[i]);
     return 0;
 }
 

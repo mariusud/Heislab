@@ -33,8 +33,6 @@ int main() {
 
         if (elev_get_stop_signal()){
             elev_set_motor_direction(DIRN_STOP);
-            printf("kom inn i den første løkka aka moren til håkon");
-            //direction = DIRN_STOP;
             last_state = 3;
             state = EMERGENCY_STOP;
         }
@@ -50,6 +48,7 @@ int main() {
                     elev_set_motor_direction(DIRN_STOP);
                     printf("last floor: %d\n",last_floor);
                     printf("last direction: %d\n",last_direction);
+                    printf("heisknull %d", order_above(last_floor-(last_direction==DIRN_DOWN)));
                     if (order_above(last_floor-(last_direction==DIRN_DOWN))){
                         printf("\n\n\n\n\n\nlivet er ikke så fett med heis %d\n\n\n\n", order_above(last_floor-(last_direction==DIRN_DOWN)));
                         direction = DIRN_UP;

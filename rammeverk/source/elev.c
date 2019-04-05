@@ -143,9 +143,10 @@ void elev_set_button_lamp(elev_button_type_t button, int floor, int value) {
     //assert(!(button == BUTTON_CALL_UP && floor == N_FLOORS - 1));
     //assert(!(button == BUTTON_CALL_DOWN && floor == 0));
     //assert(button == BUTTON_CALL_UP || button == BUTTON_CALL_DOWN || button == BUTTON_COMMAND);
-    if(floor < 0 || floor > N_FLOORS){
+    /*if(floor < 0 || floor > N_FLOORS){
         printf("Floor out of bounds. \n");
     }
+    */
     if (value)
         io_set_bit(lamp_channel_matrix[floor][button]);
     else
