@@ -114,7 +114,7 @@ void delete_all_orders(){
 
 int order_above(int floor){
     int i;
-    for (i=floor; i < N_FLOORS; i++){
+    for (i=floor+1; i < N_FLOORS; i++){
         if (arr_destination[i]){return 1;} 
         if (arr_ned[i]){return 1;} 
         if (arr_opp[i]){return 1;}    
@@ -124,7 +124,7 @@ int order_above(int floor){
 
 
 int order_below(int floor){
-    for (int i = 0; i < floor+1; i++){
+    for (int i = 0; i < floor; i++){
         if (arr_destination[i]){return 1;} 
         if (arr_ned[i]){return 1;} 
         if (arr_opp[i]){return 1;}    

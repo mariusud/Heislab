@@ -37,7 +37,7 @@ int main() {
                         state = DOORS_OPEN;
                     }else{
                         //finds out which direction to drive in
-                        if(direction == -1){
+                        if(current_floor == -1){
                             direction = get_direction(last_floor);
                             elev_set_motor_direction(direction);
                             state = DRIVE; 
@@ -54,14 +54,14 @@ int main() {
             case DRIVE:
                 if(elev_get_floor_sensor_signal() !=-1){
                     elev_set_floor_indicator(current_floor);
-                }                
+                }
+                printf("order above %d\n", order_above(current_floor));
                 if (check_queue_floor(current_floor)){
-                    
-                    if((direction == DIRN_DOWN && order_floor_direction_down(current_floor ) )|| ( direction == DIRN_DOWN && current_floor == 0)){
+                    if((direction == DIRN_DOWN) && (order_floor_direction_down(current_floor) || (current_floor == 0) || (!order_below(current_floor)))){
                         elev_set_motor_direction(DIRN_STOP);
                         state = DOORS_OPEN;
                     }
-                    else if((direction == DIRN_UP && order_floor_direction_up(current_floor) )|| ( direction == DIRN_UP && current_floor == 3)){
+                    else if((direction == DIRN_UP) && (order_floor_direction_up(current_floor) || (current_floor == N_FLOORS-1) || (!order_above(current_floor)))){
                         elev_set_motor_direction(DIRN_STOP);
                         state = DOORS_OPEN;
                     } 
