@@ -1,5 +1,7 @@
 #include "elev.h"
-
+/**@file
+ * @Contains the four states that we use in our Finite State Machine. Contains also the initializing function for the elevator.
+*/
 
 /**
   States for main

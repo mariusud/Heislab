@@ -2,7 +2,6 @@
 #include "fsm.h"
 #include "timer.h"
 #include "queue.h"
-#include <time.h>
 #include <stdio.h>
 
 
@@ -13,13 +12,13 @@ int main() {
         printf("Unable to initialize elevator hardware!\n");
         return 1;
     }
-    // initializes the elevator
+    // initialize the elevator
     FSM_init();
     init_arrays();
     State state = IDLE;
 
     int current_floor;
-    int last_floor;
+    int last_floor;     
     int last_direction;
 
     while (1) {
@@ -89,9 +88,6 @@ int main() {
 
             case DOORS_OPEN:
                 last_floor = current_floor;
-                if(current_floor == -1){ //spør studass om denne
-                    FSM_init();
-                }
                 if(!is_timer_on()){
                     timer_start();
                 }
