@@ -2,7 +2,7 @@
 
 
 /**
-  States for  FSM_move(states state).
+  States for main
 */
 typedef enum states{
     IDLE,
@@ -13,7 +13,7 @@ typedef enum states{
 
 
 /**
-  Checks if elevator is in a floor and sends it to idle or sends it down to the next floor and puts it in idle
+ @brief Sends the elevator to a floor
 */
 void FSM_init();
 

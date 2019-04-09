@@ -8,13 +8,13 @@ void timer_start();
 
 /**
 @brief Tells if timer has exceeded three seconds
-@returns 1 if timer has exceeded three seconds and 0 if not
+@returns 1 if timer has exceeded three seconds, 0 else
 */
 int timer_three_seconds();
 
 /**
 @brief Tells if timer is on
-@returns 1 if timer is on and 0 if timer is turned off
+@returns 1 if timer is on, 0 else
 */
 int is_timer_on();
 
