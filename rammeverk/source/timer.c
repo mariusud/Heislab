@@ -22,6 +22,6 @@ int timer_on(){
     return 0;
 }
 
-void turn_off_timer(){
+void timer_turn_off(){
     timer = -1;
 }

@@ -10,7 +10,7 @@ elev_motor_direction_t g_direction;
 
 
 
-void init_arrays(){
+void queue_init_arrays(){
     int i;
     for (i =0; i < N_FLOORS;i++){
         arr_destination[i] = 0;
@@ -19,7 +19,7 @@ void init_arrays(){
     }
 }
 
-int check_orders(){
+int queue_check_orders(){
     for(int i = 0; i < N_FLOORS; i++){
         if(arr_destination[i]) return 1;
         if(arr_down[i]) return 1;
@@ -28,7 +28,7 @@ int check_orders(){
     return 0;
 }
 
-int check_queue(){
+int queue_update_orders(){
     int i;
     for (i=0; i < N_FLOORS; i++){
         if (i == 0){
@@ -76,7 +76,7 @@ int check_queue(){
 }
 
 
-int check_queue_floor(int floor){
+int queue_check_order_in_floor(int floor){
     if (floor == -1){return 0;}
     if (arr_up[floor]){
         return 1;
@@ -93,7 +93,7 @@ int check_queue_floor(int floor){
 }
 
 
-void delete_floor_order(int floor){
+void queue_delete_floor_order(int floor){
     elev_set_button_lamp(BUTTON_CALL_UP,floor,0);
     elev_set_button_lamp(BUTTON_CALL_DOWN,floor,0);
     elev_set_button_lamp(BUTTON_COMMAND,floor,0);
@@ -103,15 +103,15 @@ void delete_floor_order(int floor){
 
 }
 
-void delete_all_orders(){
+void queue_delete_all_orders(){
     int i;
     for (i = 0; i < N_FLOORS;i++){
-        delete_floor_order(i);
+        queue_delete_floor_order(i);
     }
 }
 
 
-int order_above(int floor){
+int queue_order_above(int floor){
     int i;
     for (i=floor+1; i < N_FLOORS; i++){
         if (arr_destination[i]){return 1;} 
@@ -122,7 +122,7 @@ int order_above(int floor){
 }
 
 
-int order_below(int floor){
+int queue_order_below(int floor){
     for (int i = 0; i < floor; i++){
         if (arr_destination[i]){return 1;} 
         if (arr_down[i]){return 1;} 
@@ -131,24 +131,24 @@ int order_below(int floor){
     return 0;
 }
 
-int order_floor_direction_down(int floor){
+int queue_order_floor_direction_down(int floor){
     if (arr_destination[floor]){return 1;} 
     if (arr_down[floor]){return 1;} 
     return 0;
 }
 
-int order_floor_direction_up(int floor){
+int queue_order_floor_direction_up(int floor){
     if (arr_destination[floor]){return 1;} 
     if (arr_up[floor]){return 1;} 
     return 0;
 }
 
 
-elev_motor_direction_t get_direction(int floor){
-    if ( order_above(floor) && g_direction == DIRN_UP){return DIRN_UP;}
-    else if (order_below(floor) && g_direction == DIRN_DOWN){return DIRN_DOWN;}
-    else if (order_above(floor)){return DIRN_UP;}
-    else if (order_below(floor)){return DIRN_DOWN;}
+elev_motor_direction_t queue_get_direction(int floor){
+    if ( queue_order_above(floor) && g_direction == DIRN_UP){return DIRN_UP;}
+    else if (queue_order_below(floor) && g_direction == DIRN_DOWN){return DIRN_DOWN;}
+    else if (queue_order_above(floor)){return DIRN_UP;}
+    else if (queue_order_below(floor)){return DIRN_DOWN;}
     else if (floor == -1){
         return g_direction;
         }

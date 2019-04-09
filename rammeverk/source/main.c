@@ -11,7 +11,7 @@ int main() {
         return 1;
     }
     FSM_init();
-    init_arrays();
+    queue_init_arrays();
     State state = IDLE;
 
     int current_floor;
@@ -22,7 +22,7 @@ int main() {
 
         //updates current_floor, queue and last_floor continuously
         current_floor = elev_get_floor_sensor_signal();
-        check_queue();
+        queue_update_orders();
         if (elev_get_floor_sensor_signal() != -1){ last_floor = elev_get_floor_sensor_signal();}
 
         if (elev_get_stop_signal()){
@@ -36,12 +36,12 @@ int main() {
                 if ((current_floor == -1) && (g_direction == DIRN_STOP)){
                     elev_set_motor_direction(DIRN_STOP);
                     //checks if there are any orders and if the orders are above the previous floor
-                    if ( check_queue() && order_above(last_floor-(last_direction==DIRN_DOWN))) {
+                    if (queue_check_orders() && queue_order_above(last_floor-(last_direction==DIRN_DOWN))) {
                         g_direction = DIRN_UP;
                         elev_set_motor_direction(g_direction);  
                         state = DRIVE;
                     } 
-                    else if(check_queue()){
+                    else if(queue_check_orders()){
                         g_direction = DIRN_DOWN;
                         elev_set_motor_direction(g_direction); 
                         state = DRIVE;
@@ -49,16 +49,16 @@ int main() {
                     break;
                 }
                 //goes here if the elevator is in a floor
-                if (check_orders()){
-                    if(check_queue_floor(current_floor)){
+                if (queue_check_orders()){
+                    if(queue_check_order_in_floor(current_floor)){
                         state = DOORS_OPEN;
                     }else{
                         if(current_floor == -1){
-                            g_direction = get_direction(last_floor);
+                            g_direction = queue_get_direction(last_floor);
                             elev_set_motor_direction(g_direction);
                             state = DRIVE; 
                         }else{
-                            g_direction = get_direction(current_floor);
+                            g_direction = queue_get_direction(current_floor);
                             elev_set_motor_direction(g_direction);
                             state = DRIVE;
                         }
@@ -73,13 +73,13 @@ int main() {
                 if(elev_safety(g_direction)){
                     state = IDLE;
                 }
-                if (check_queue_floor(current_floor)){
+                if (queue_check_order_in_floor(current_floor)){
                     //checks if the elevator is going to stop if a floor has an order
-                    if((g_direction == DIRN_DOWN) && (order_floor_direction_down(current_floor) || (current_floor == 0) || (!order_below(current_floor)))){
+                    if((g_direction == DIRN_DOWN) && (queue_order_floor_direction_down(current_floor) || (current_floor == 0) || (!queue_order_below(current_floor)))){
                         elev_set_motor_direction(DIRN_STOP);
                         state = DOORS_OPEN;
                     }
-                    else if((g_direction == DIRN_UP) && (order_floor_direction_up(current_floor) || (current_floor == N_FLOORS-1) || (!order_above(current_floor)))){
+                    else if((g_direction == DIRN_UP) && (queue_order_floor_direction_up(current_floor) || (current_floor == N_FLOORS-1) || (!queue_order_above(current_floor)))){
                         elev_set_motor_direction(DIRN_STOP);
                         state = DOORS_OPEN;
                     } 
@@ -91,13 +91,13 @@ int main() {
                 if(!timer_on()){
                     timer_start();
                 }
-                delete_floor_order(current_floor);
+                queue_delete_floor_order(current_floor);
                 elev_set_door_open_lamp(1);
                 if(timer_three_seconds()){
                     elev_set_door_open_lamp(0);
-                    turn_off_timer();
-                    if(check_orders()){
-                        g_direction = get_direction(current_floor);
+                    timer_turn_off();
+                    if(queue_check_orders()){
+                        g_direction = queue_get_direction(current_floor);
                         elev_set_motor_direction(g_direction);
                         state = DRIVE;
                     }else{
@@ -110,7 +110,7 @@ int main() {
                 last_direction = g_direction;
                 elev_set_motor_direction(DIRN_STOP);
                 g_direction = DIRN_STOP;
-                delete_all_orders();
+                queue_delete_all_orders();
                 while(elev_get_stop_signal()){
                     elev_set_stop_lamp(1);
                     if (current_floor != -1){
@@ -124,13 +124,13 @@ int main() {
                         timer_start();
                     }
                     if(elev_get_stop_signal()){
-                        turn_off_timer();
+                        timer_turn_off();
                         state = EMERGENCY_STOP;
                     }
                     elev_set_door_open_lamp(1);
                     if(timer_three_seconds()){
                         elev_set_door_open_lamp(0);
-                        turn_off_timer();
+                        timer_turn_off();
                         state = IDLE;
                     }
                 }else{

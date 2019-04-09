@@ -25,4 +25,4 @@ int timer_on();
 /**
 @brief Turns of timer. Sets the value of the timer variable to -1
 */
-void turn_off_timer();
+void timer_turn_off();

@@ -136,7 +136,7 @@ int elev_safety(elev_motor_direction_t dir){
         elev_set_motor_direction(DIRN_STOP);
         return 1;
     }
-    else if ((elev_get_floor_sensor_signal()==0) && (dir==DIRN_DOWN)){
+    else if ((elev_get_floor_sensor_signal()==3) && (dir==DIRN_UP)){
         elev_set_motor_direction(DIRN_STOP);
         return 1;
     }
