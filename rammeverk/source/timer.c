@@ -15,7 +15,7 @@ int timer_three_seconds(){
     }
 }
 
-int is_timer_on(){
+int timer_on(){
     if(timer != -1){
         return 1;
     }

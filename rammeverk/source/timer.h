@@ -19,7 +19,7 @@ int timer_three_seconds();
 @brief Tells if timer is on
 @returns 1 if timer is on, 0 else
 */
-int is_timer_on();
+int timer_on();
 
 
 /**

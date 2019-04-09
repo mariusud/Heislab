@@ -6,7 +6,7 @@
 static int arr_up[N_FLOORS]; 
 static int arr_down[N_FLOORS]; 
 static int arr_destination[N_FLOORS];
-elev_motor_direction_t direction;
+elev_motor_direction_t g_direction;
 
 
 
@@ -145,14 +145,14 @@ int order_floor_direction_up(int floor){
 
 
 elev_motor_direction_t get_direction(int floor){
-    if ( order_above(floor) && direction == DIRN_UP){return DIRN_UP;}
-    else if (order_below(floor) && direction == DIRN_DOWN){return DIRN_DOWN;}
+    if ( order_above(floor) && g_direction == DIRN_UP){return DIRN_UP;}
+    else if (order_below(floor) && g_direction == DIRN_DOWN){return DIRN_DOWN;}
     else if (order_above(floor)){return DIRN_UP;}
     else if (order_below(floor)){return DIRN_DOWN;}
     else if (floor == -1){
-        return direction;
+        return g_direction;
         }
     else{
-        return direction;
+        return g_direction;
     }
 }

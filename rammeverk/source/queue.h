@@ -1,7 +1,9 @@
 /**@file
  * @Contains the variables and functions we use for our queue system. 
 */
-extern elev_motor_direction_t direction;
+
+
+extern elev_motor_direction_t g_direction;
 
 
 /**
@@ -71,9 +73,8 @@ int order_floor_direction_up(int floor);
 /**
   @brief tells the elevator which way to go.
   Check for order on all floors and in elevator.
-  Iterate through whole lists to see if orders above, below or in current floor.
   @param floor Which floor the elevator was in last.
-  @returns DIRN_UP if direction up, DIRN_STOP if order in current floor or DIRN_DOWN if direction down
+  @returns DIRN_UP if  up, DIRN_STOP if order in current floor or DIRN_DOWN if  down
   
 */
 elev_motor_direction_t get_direction(int floor);
