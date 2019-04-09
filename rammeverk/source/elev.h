@@ -118,6 +118,11 @@ int elev_get_button_signal(elev_button_type_t button, int floor);
 */
 void elev_set_button_lamp(elev_button_type_t button, int floor, int value);
 
-
+/**
+  @brief Stops elevator if it going out of bounds.
+  @param dir Direction of the elevator.
+  @returns 1 if the elevator is on it's way out of bounds, 0 else.
+*/
+int elev_safety(elev_motor_direction_t dir);
 
 #endif // #ifndef __INCLUDE_DRIVER_H__

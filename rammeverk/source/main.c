@@ -70,6 +70,9 @@ int main() {
                 if(elev_get_floor_sensor_signal() !=-1){
                     elev_set_floor_indicator(current_floor);
                 }
+                if(elev_safety(g_direction)){
+                    state = IDLE;
+                }
                 if (check_queue_floor(current_floor)){
                     //checks if the elevator is going to stop if a floor has an order
                     if((g_direction == DIRN_DOWN) && (order_floor_direction_down(current_floor) || (current_floor == 0) || (!order_below(current_floor)))){

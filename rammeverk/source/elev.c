@@ -130,3 +130,17 @@ void elev_set_button_lamp(elev_button_type_t button, int floor, int value) {
     else
         io_clear_bit(lamp_channel_matrix[floor][button]);
 }
+
+int elev_safety(elev_motor_direction_t dir){
+    if((elev_get_floor_sensor_signal()==0) && (dir==DIRN_DOWN)){
+        elev_set_motor_direction(DIRN_STOP);
+        return 1;
+    }
+    else if ((elev_get_floor_sensor_signal()==0) && (dir==DIRN_DOWN)){
+        elev_set_motor_direction(DIRN_STOP);
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
