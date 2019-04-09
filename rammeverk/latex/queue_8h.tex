@@ -1,0 +1,237 @@
+\hypertarget{queue_8h}{}\section{source/queue.h File Reference}
+\label{queue_8h}\index{source/queue.\+h@{source/queue.\+h}}
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{queue_8h_a5e027330a1772f60c258860cc7c9dbe2}{init\+\_\+arrays} ()\hypertarget{queue_8h_a5e027330a1772f60c258860cc7c9dbe2}{}\label{queue_8h_a5e027330a1772f60c258860cc7c9dbe2}
+
+\begin{DoxyCompactList}\small\item\em initilializes queue arrays. \end{DoxyCompactList}\item 
+int \hyperlink{queue_8h_a80e4bffe2ae99897064b3f393723eed5}{check\+\_\+orders} ()
+\begin{DoxyCompactList}\small\item\em Checks if there are any orders at all. \end{DoxyCompactList}\item 
+int \hyperlink{queue_8h_a7181c36cb8266ab419b2123af951ad5a}{check\+\_\+queue} ()
+\begin{DoxyCompactList}\small\item\em If a button is pushed, adds the order to the floor. Needs to be running all the time. \end{DoxyCompactList}\item 
+int \hyperlink{queue_8h_a09d2b048864f232bdf8b8b96451cbf85}{check\+\_\+queue\+\_\+floor} (int floor)
+\begin{DoxyCompactList}\small\item\em Check for order on input floor. \end{DoxyCompactList}\item 
+void \hyperlink{queue_8h_ac5c0a8de645ace4d19b180c45f38cd99}{delete\+\_\+floor\+\_\+order} (int floor)
+\begin{DoxyCompactList}\small\item\em delete all orders on input floor \end{DoxyCompactList}\item 
+void \hyperlink{queue_8h_a354673e32c970850bb1feac18c732678}{delete\+\_\+all\+\_\+orders} ()\hypertarget{queue_8h_a354673e32c970850bb1feac18c732678}{}\label{queue_8h_a354673e32c970850bb1feac18c732678}
+
+\begin{DoxyCompactList}\small\item\em sets arr\+\_\+opp, arr\+\_\+ned, arr\+\_\+destination to zero in all floors. \end{DoxyCompactList}\item 
+int \hyperlink{queue_8h_a87e135e6090310e9cee8784069f7f114}{order\+\_\+above} (int floor)
+\begin{DoxyCompactList}\small\item\em checks if there are any orders above the input floor. \end{DoxyCompactList}\item 
+int \hyperlink{queue_8h_a747ca24ae23182b4517d15f07146e138}{order\+\_\+below} (int floor)
+\begin{DoxyCompactList}\small\item\em checks if there are any orders below the input floor. \end{DoxyCompactList}\item 
+int \hyperlink{queue_8h_a00266f91804e82b0e5f8db5912b9f5f8}{order\+\_\+floor\+\_\+direction\+\_\+down} (int floor)
+\begin{DoxyCompactList}\small\item\em checks if there any orders that\textquotesingle{}s going down or from inside in the input floor. \end{DoxyCompactList}\item 
+int \hyperlink{queue_8h_a1df3dac1e3d0bd3b02539a41fb1b13cb}{order\+\_\+floor\+\_\+direction\+\_\+up} (int floor)
+\begin{DoxyCompactList}\small\item\em checks if there any orders that\textquotesingle{}s going up or from inside in the input floor. \end{DoxyCompactList}\item 
+\hyperlink{elev_8h_a2256dfd58fecce253106f83fd2ed607f}{elev\+\_\+motor\+\_\+direction\+\_\+t} \hyperlink{queue_8h_a71efdf7fbf5ec523a81603ed20a6ec91}{get\+\_\+direction} (int floor)
+\begin{DoxyCompactList}\small\item\em tells the elevator which way to go. Check for order on all floors and in elevator. Iterate through whole lists to see if orders above, below or in current floor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{elev_8h_a2256dfd58fecce253106f83fd2ed607f}{elev\+\_\+motor\+\_\+direction\+\_\+t} {\bfseries direction}\hypertarget{queue_8h_a2f8f575cf28a1b7fce27781b882949cc}{}\label{queue_8h_a2f8f575cf28a1b7fce27781b882949cc}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+the variables and functions we use for our queue system. 
+
+\subsection{Function Documentation}
+\index{queue.\+h@{queue.\+h}!check\+\_\+orders@{check\+\_\+orders}}
+\index{check\+\_\+orders@{check\+\_\+orders}!queue.\+h@{queue.\+h}}
+\subsubsection[{\texorpdfstring{check\+\_\+orders()}{check_orders()}}]{\setlength{\rightskip}{0pt plus 5cm}int check\+\_\+orders (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{queue_8h_a80e4bffe2ae99897064b3f393723eed5}{}\label{queue_8h_a80e4bffe2ae99897064b3f393723eed5}
+
+
+Checks if there are any orders at all. 
+
+\begin{DoxyReturn}{Returns}
+1 if there IS an order, 0 else 
+\end{DoxyReturn}
+
+
+Definition at line 22 of file queue.\+c.
+
+\index{queue.\+h@{queue.\+h}!check\+\_\+queue@{check\+\_\+queue}}
+\index{check\+\_\+queue@{check\+\_\+queue}!queue.\+h@{queue.\+h}}
+\subsubsection[{\texorpdfstring{check\+\_\+queue()}{check_queue()}}]{\setlength{\rightskip}{0pt plus 5cm}int check\+\_\+queue (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{queue_8h_a7181c36cb8266ab419b2123af951ad5a}{}\label{queue_8h_a7181c36cb8266ab419b2123af951ad5a}
+
+
+If a button is pushed, adds the order to the floor. Needs to be running all the time. 
+
+\begin{DoxyReturn}{Returns}
+1 if someone is pushing a button, 0 else 
+\end{DoxyReturn}
+
+
+Definition at line 31 of file queue.\+c.
+
+\index{queue.\+h@{queue.\+h}!check\+\_\+queue\+\_\+floor@{check\+\_\+queue\+\_\+floor}}
+\index{check\+\_\+queue\+\_\+floor@{check\+\_\+queue\+\_\+floor}!queue.\+h@{queue.\+h}}
+\subsubsection[{\texorpdfstring{check\+\_\+queue\+\_\+floor(int floor)}{check_queue_floor(int floor)}}]{\setlength{\rightskip}{0pt plus 5cm}int check\+\_\+queue\+\_\+floor (
+\begin{DoxyParamCaption}
+\item[{int}]{floor}
+\end{DoxyParamCaption}
+)}\hypertarget{queue_8h_a09d2b048864f232bdf8b8b96451cbf85}{}\label{queue_8h_a09d2b048864f232bdf8b8b96451cbf85}
+
+
+Check for order on input floor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em floor} & Which floor to check the queue in. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if there exists an order in the floor, 0 else 
+\end{DoxyReturn}
+
+
+Definition at line 79 of file queue.\+c.
+
+\index{queue.\+h@{queue.\+h}!delete\+\_\+floor\+\_\+order@{delete\+\_\+floor\+\_\+order}}
+\index{delete\+\_\+floor\+\_\+order@{delete\+\_\+floor\+\_\+order}!queue.\+h@{queue.\+h}}
+\subsubsection[{\texorpdfstring{delete\+\_\+floor\+\_\+order(int floor)}{delete_floor_order(int floor)}}]{\setlength{\rightskip}{0pt plus 5cm}void delete\+\_\+floor\+\_\+order (
+\begin{DoxyParamCaption}
+\item[{int}]{floor}
+\end{DoxyParamCaption}
+)}\hypertarget{queue_8h_ac5c0a8de645ace4d19b180c45f38cd99}{}\label{queue_8h_ac5c0a8de645ace4d19b180c45f38cd99}
+
+
+delete all orders on input floor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em floor} & Which floor to delete orders in. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 96 of file queue.\+c.
+
+\index{queue.\+h@{queue.\+h}!get\+\_\+direction@{get\+\_\+direction}}
+\index{get\+\_\+direction@{get\+\_\+direction}!queue.\+h@{queue.\+h}}
+\subsubsection[{\texorpdfstring{get\+\_\+direction(int floor)}{get_direction(int floor)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf elev\+\_\+motor\+\_\+direction\+\_\+t} get\+\_\+direction (
+\begin{DoxyParamCaption}
+\item[{int}]{floor}
+\end{DoxyParamCaption}
+)}\hypertarget{queue_8h_a71efdf7fbf5ec523a81603ed20a6ec91}{}\label{queue_8h_a71efdf7fbf5ec523a81603ed20a6ec91}
+
+
+tells the elevator which way to go. Check for order on all floors and in elevator. Iterate through whole lists to see if orders above, below or in current floor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em floor} & Which floor the elevator was in last. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+D\+I\+R\+N\+\_\+\+UP if direction up, D\+I\+R\+N\+\_\+\+S\+T\+OP if order in current floor or D\+I\+R\+N\+\_\+\+D\+O\+WN if direction down 
+\end{DoxyReturn}
+
+
+Definition at line 147 of file queue.\+c.
+
+\index{queue.\+h@{queue.\+h}!order\+\_\+above@{order\+\_\+above}}
+\index{order\+\_\+above@{order\+\_\+above}!queue.\+h@{queue.\+h}}
+\subsubsection[{\texorpdfstring{order\+\_\+above(int floor)}{order_above(int floor)}}]{\setlength{\rightskip}{0pt plus 5cm}int order\+\_\+above (
+\begin{DoxyParamCaption}
+\item[{int}]{floor}
+\end{DoxyParamCaption}
+)}\hypertarget{queue_8h_a87e135e6090310e9cee8784069f7f114}{}\label{queue_8h_a87e135e6090310e9cee8784069f7f114}
+
+
+checks if there are any orders above the input floor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em floor} & Which floor to check if there are orders above. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if true, 0 else 
+\end{DoxyReturn}
+
+
+Definition at line 114 of file queue.\+c.
+
+\index{queue.\+h@{queue.\+h}!order\+\_\+below@{order\+\_\+below}}
+\index{order\+\_\+below@{order\+\_\+below}!queue.\+h@{queue.\+h}}
+\subsubsection[{\texorpdfstring{order\+\_\+below(int floor)}{order_below(int floor)}}]{\setlength{\rightskip}{0pt plus 5cm}int order\+\_\+below (
+\begin{DoxyParamCaption}
+\item[{int}]{floor}
+\end{DoxyParamCaption}
+)}\hypertarget{queue_8h_a747ca24ae23182b4517d15f07146e138}{}\label{queue_8h_a747ca24ae23182b4517d15f07146e138}
+
+
+checks if there are any orders below the input floor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em floor} & Which floor to check if there are orders below. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if true, 0 else 
+\end{DoxyReturn}
+
+
+Definition at line 125 of file queue.\+c.
+
+\index{queue.\+h@{queue.\+h}!order\+\_\+floor\+\_\+direction\+\_\+down@{order\+\_\+floor\+\_\+direction\+\_\+down}}
+\index{order\+\_\+floor\+\_\+direction\+\_\+down@{order\+\_\+floor\+\_\+direction\+\_\+down}!queue.\+h@{queue.\+h}}
+\subsubsection[{\texorpdfstring{order\+\_\+floor\+\_\+direction\+\_\+down(int floor)}{order_floor_direction_down(int floor)}}]{\setlength{\rightskip}{0pt plus 5cm}int order\+\_\+floor\+\_\+direction\+\_\+down (
+\begin{DoxyParamCaption}
+\item[{int}]{floor}
+\end{DoxyParamCaption}
+)}\hypertarget{queue_8h_a00266f91804e82b0e5f8db5912b9f5f8}{}\label{queue_8h_a00266f91804e82b0e5f8db5912b9f5f8}
+
+
+checks if there any orders that\textquotesingle{}s going down or from inside in the input floor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em floor} & Which floor to check if there are any orders to take. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if true, 0 else 
+\end{DoxyReturn}
+
+
+Definition at line 134 of file queue.\+c.
+
+\index{queue.\+h@{queue.\+h}!order\+\_\+floor\+\_\+direction\+\_\+up@{order\+\_\+floor\+\_\+direction\+\_\+up}}
+\index{order\+\_\+floor\+\_\+direction\+\_\+up@{order\+\_\+floor\+\_\+direction\+\_\+up}!queue.\+h@{queue.\+h}}
+\subsubsection[{\texorpdfstring{order\+\_\+floor\+\_\+direction\+\_\+up(int floor)}{order_floor_direction_up(int floor)}}]{\setlength{\rightskip}{0pt plus 5cm}int order\+\_\+floor\+\_\+direction\+\_\+up (
+\begin{DoxyParamCaption}
+\item[{int}]{floor}
+\end{DoxyParamCaption}
+)}\hypertarget{queue_8h_a1df3dac1e3d0bd3b02539a41fb1b13cb}{}\label{queue_8h_a1df3dac1e3d0bd3b02539a41fb1b13cb}
+
+
+checks if there any orders that\textquotesingle{}s going up or from inside in the input floor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em floor} & Which floor to check if there are any orders to take. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if true, 0 else 
+\end{DoxyReturn}
+
+
+Definition at line 140 of file queue.\+c.
+
