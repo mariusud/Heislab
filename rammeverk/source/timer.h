@@ -1,4 +1,7 @@
 #include <time.h>
+/**@file
+ * @Contains functions that takes care of the three second timer.
+*/
 
 
 /**

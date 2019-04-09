@@ -1,8 +1,6 @@
-// Wrapper for libComedi I/O.
-// These functions provide and interface to libComedi limited to use in
-// the real time lab.
-//
-// 2006, Martin Korsgaard
+/**@file
+ * @Contains functions that takes care of the input/output from computer to elevator.
+*/
 #ifndef __INCLUDE_IO_H__
 #define __INCLUDE_IO_H__
 

@@ -7,6 +7,7 @@ void timer_start() {
 }
 
 int timer_three_seconds(){
+    //blir mer nøyaktig 3 sekunder med (time(NULL)-timer)>2 enn 3
     if ((time(NULL)-timer)>2){
         return 1;
     }else{

@@ -1,7 +1,7 @@
-// Wrapper for libComedi Elevator control.
-// These functions provides an interface to the elevators in the real time lab
-//
-// 2007, Martin Korsgaard
+/**@file
+ * @Contains functions that affect the elevator.
+*/
+
 #ifndef __INCLUDE_DRIVER_H__
 #define __INCLUDE_DRIVER_H__
 
@@ -88,7 +88,7 @@ void elev_set_floor_indicator(int floor);
 
 
 /**
-  Button types for function elev_set_button_lamp() and elev_get_button().
+  Button types for function elev_set_button_lamp() and elev_get_button_signal().
 */
 typedef enum tag_elev_lamp_type { 
     BUTTON_CALL_UP = 0,
