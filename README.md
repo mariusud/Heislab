@@ -6,4 +6,13 @@ git add source/
 git commit -m "add melding her"
 git push origin eirikfix
 ```
+TIL MAGNE
+For å kjøre koden:
 
+```
+git clone https://github.com/mariusud/Heislab
+cd Heislab/rammeverk
+make clean
+make
+./heis
+```
